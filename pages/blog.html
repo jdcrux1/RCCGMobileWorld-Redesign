@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog — RCCG Mobile World</title>
+    <meta name="description" content="Read the latest articles, news, and stories from RCCG. Stay informed about what's happening in our church and community.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    },
+                    colors: {
+                        brand: {
+                            base: '#0f172a',
+                            light: '#1e293b',
+                            accent: '#3b82f6',
+                            gold: '#d97706',
+                            green: '#22c55e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #020617; color: white; }
+        .glass-nav { background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .btn-primary { background: #22c55e; color: #020617; transition: all 0.3s ease; }
+        .btn-primary:hover { background: #4ade80; transform: translateY(-2px); }
+        .page-hero { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); padding: 180px 0 80px; text-align: center; }
+        .page-hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; color: white; margin-bottom: 20px; }
+        .page-hero-subtitle { font-size: 1.25rem; color: #94a3b8; max-width: 600px; margin: 0 auto; }
+        footer { background: #020617; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: #22c55e; color: #020617; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 4000; opacity: 0; transform: translateY(20px); pointer-events: none; transition: all 0.4s ease; }
+        .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        .content-card { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.4s ease; }
+        .content-card:hover { transform: translateY(-8px); border-color: rgba(34, 197, 94, 0.3); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="../index3.html" class="font-serif text-2xl font-bold tracking-tight text-white">RCCG<span class="text-brand-green">.</span></a>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="../index3.html" class="text-sm font-medium text-gray-300 hover:text-white">Home</a>
+                    <a href="about.html" class="text-sm font-medium text-gray-300 hover:text-white">About</a>
+                    <a href="sermons.html" class="text-sm font-medium text-gray-300 hover:text-white">Sermons</a>
+                    <a href="events.html" class="text-sm font-medium text-gray-300 hover:text-white">Events</a>
+                    <a href="contact.html" class="text-sm font-medium text-gray-300 hover:text-white">Contact</a>
+                    <a href="give.html" class="text-sm font-medium text-white btn-primary px-5 py-2 rounded-full">Give</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="max-w-4xl mx-auto px-4">
+            <p class="text-brand-green font-semibold uppercase tracking-wider mb-4">Blog</p>
+            <h1 class="page-hero-title">Latest Articles & News</h1>
+            <p class="page-hero-subtitle">Stay informed with the latest stories, news, and articles from RCCG.</p>
+        </div>
+    </section>
+
+    <!-- Blog Grid -->
+    <section class="py-20 bg-[#020617]">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Blog Post 1 -->
+                <div class="content-card rounded-2xl overflow-hidden cursor-pointer group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=600" alt="Blog" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <p class="text-brand-green text-sm font-semibold mb-2">February 10, 2026</p>
+                        <h3 class="font-serif text-xl font-bold text-white mb-2 group-hover:text-brand-green transition-colors">The Power of Prayer in Difficult Times</h3>
+                        <p class="text-gray-400 text-sm mb-4">Discover how prayer can transform your life and bring peace during challenging moments.</p>
+                        <a href="blog-post.html" class="text-brand-green font-semibold text-sm">Read More →</a>
+                    </div>
+                </div>
+
+                <!-- Blog Post 2 -->
+                <div class="content-card rounded-2xl overflow-hidden cursor-pointer group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1478147427282-58a87a120781?w=600" alt="Blog" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <p class="text-brand-green text-sm font-semibold mb-2">February 5, 2026</p>
+                        <h3 class="font-serif text-xl font-bold text-white mb-2 group-hover:text-brand-green transition-colors">Building Strong Families Through Faith</h3>
+                        <p class="text-gray-400 text-sm mb-4">Learn practical tips for strengthening your family bonds through spiritual principles.</p>
+                        <a href="blog-post.html" class="text-brand-green font-semibold text-sm">Read More →</a>
+                    </div>
+                </div>
+
+                <!-- Blog Post 3 -->
+                <div class="content-card rounded-2xl overflow-hidden cursor-pointer group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600" alt="Blog" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <p class="text-brand-green text-sm font-semibold mb-2">January 28, 2026</p>
+                        <h3 class="font-serif text-xl font-bold text-white mb-2 group-hover:text-brand-green transition-colors">Youth Conference 2026: What to Expect</h3>
+                        <p class="text-gray-400 text-sm mb-4">Get ready for an unforgettable experience of worship, fellowship, and empowerment.</p>
+                        <a href="blog-post.html" class="text-brand-green font-semibold text-sm">Read More →</a>
+                    </div>
+                </div>
+
+                <!-- Blog Post 4 -->
+                <div class="content-card rounded-2xl overflow-hidden cursor-pointer group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1507692049790-de58290a4334?w=600" alt="Blog" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <p class="text-brand-green text-sm font-semibold mb-2">January 20, 2026</p>
+                        <h3 class="font-serif text-xl font-bold text-white mb-2 group-hover:text-brand-green transition-colors">Walking in Divine Purpose</h3>
+                        <p class="text-gray-400 text-sm mb-4">Understanding God's plan for your life and how to walk in it daily.</p>
+                        <a href="blog-post.html" class="text-brand-green font-semibold text-sm">Read More →</a>
+                    </div>
+                </div>
+
+                <!-- Blog Post 5 -->
+                <div class="content-card rounded-2xl overflow-hidden cursor-pointer group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600" alt="Blog" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <p class="text-brand-green text-sm font-semibold mb-2">January 15, 2026</p>
+                        <h3 class="font-serif text-xl font-bold text-white mb-2 group-hover:text-brand-green transition-colors">The Importance of Church Community</h3>
+                        <p class="text-gray-400 text-sm mb-4">Why fellowship with other believers is essential for spiritual growth.</p>
+                        <a href="blog-post.html" class="text-brand-green font-semibold text-sm">Read More →</a>
+                    </div>
+                </div>
+
+                <!-- Blog Post 6 -->
+                <div class="content-card rounded-2xl overflow-hidden cursor-pointer group">
+                    <div class="relative h-48 overflow-hidden bg-gradient-to-br from-brand-light to-brand-base flex items-center justify-center">
+                        <div class="text-center">
+                            <p class="text-white font-semibold">View All Posts</p>
+                            <p class="text-gray-400 text-sm">Browse archive</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-serif text-xl font-bold text-white mb-2">Archive</h3>
+                        <p class="text-gray-400 text-sm mb-4">Browse all previous articles</p>
+                        <a href="#" class="text-brand-green font-semibold text-sm">View Archive →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <a href="../index3.html" class="font-serif text-2xl font-bold tracking-tight text-white mb-4 block">RCCG<span class="text-brand-green">.</span></a>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6 max-w-md">A place where faith grows, hearts connect, and lives are transformed.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-4">
+                        <li><a href="about.html" class="text-gray-400 hover:text-white text-sm">About Us</a></li>
+                        <li><a href="sermons.html" class="text-gray-400 hover:text-white text-sm">Sermons</a></li>
+                        <li><a href="events.html" class="text-gray-400 hover:text-white text-sm">Events</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-6">Resources</h4>
+                    <ul class="space-y-4">
+                        <li><a href="blog.html" class="text-gray-400 hover:text-white text-sm">Blog</a></li>
+                        <li><a href="devotionals.html" class="text-gray-400 hover:text-white text-sm">Devotionals</a></li>
+                        <li><a href="testimonies.html" class="text-gray-400 hover:text-white text-sm">Testimonies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 flex justify-between text-sm text-gray-500">
+                <p>&copy; 2026 RCCG Mobile World. All rights reserved.</p>
+                <div class="space-x-4">
+                    <a href="privacy-policy.html" class="hover:text-white">Privacy Policy</a>
+                    <a href="terms-of-service.html" class="hover:text-white">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 500);
+        });
+    </script>
+    <button id="backToTop" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+</body>
+
+</html>

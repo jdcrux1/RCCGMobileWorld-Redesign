@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — RCCG Mobile World</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] }, colors: { brand: { base: '#0f172a', light: '#1e293b', green: '#22c55e' } } } } }</script>
+    <style>
+        body { background-color: #020617; color: white; }
+        .glass-nav { background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(12px); }
+        .btn-primary { background: #22c55e; color: #020617; }
+        .page-hero { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); padding: 180px 0 80px; text-align: center; }
+        .page-hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; margin-bottom: 20px; }
+        footer { background: #020617; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <nav class="fixed w-full z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-20">
+                <a href="../index3.html" class="font-serif text-2xl font-bold text-white">RCCG<span class="text-brand-green">.</span></a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index3.html" class="text-sm text-gray-300">Home</a>
+                    <a href="about.html" class="text-sm text-white border-b border-brand-green">About</a>
+                    <a href="sermons.html" class="text-sm text-gray-300">Sermons</a>
+                    <a href="events.html" class="text-sm text-gray-300">Events</a>
+                    <a href="contact.html" class="text-sm text-gray-300">Contact</a>
+                    <a href="give.html" class="btn-primary px-5 py-2 rounded-full text-sm">Give</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <p class="text-brand-green font-semibold uppercase tracking-wider mb-4">About Us</p>
+        <h1 class="page-hero-title">Our Story</h1>
+        <p class="text-gray-400 max-w-xl mx-auto">Learn about our mission and vision.</p>
+    </section>
+
+    <section class="py-20 bg-[#020617]">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-16">
+                <div>
+                    <h2 class="font-serif text-3xl font-bold text-white mb-6">Who We Are</h2>
+                    <p class="text-gray-400 mb-6">The Redeemed Christian Church of God (RCCG) is a worldwide fellowship with a vision of propagating the Gospel of our Lord Jesus Christ to the ends of the earth.</p>
+                    <p class="text-gray-400">Our mission is to impact the world for Christ through the preaching of the Word and practical demonstration of the Holy Spirit's power.</p>
+                </div>
+                <div class="relative h-80 rounded-2xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=600" alt="Church" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-[#0f172a]">
+        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-8">
+            <div class="bg-gray-800/50 p-10 rounded-2xl">
+                <h3 class="font-serif text-2xl font-bold text-white mb-4">Our Vision</h3>
+                <p class="text-gray-400">To be a church where the presence of God is tangible, lives are transformed.</p>
+            </div>
+            <div class="bg-gray-800/50 p-10 rounded-2xl">
+                <h3 class="font-serif text-2xl font-bold text-white mb-4">Our Mission</h3>
+                <p class="text-gray-400">To present Jesus Christ to individuals and families, build them in the image of God.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-12">
+                <div class="col-span-2">
+                    <a href="../index3.html" class="font-serif text-2xl font-bold text-white mb-4 block">RCCG<span class="text-brand-green">.</span></a>
+                    <p class="text-gray-400 text-sm">A place where faith grows.</p>
+                </div>
+                <div><h4 class="text-white font-semibold mb-6">Quick Links</h4><ul class="space-y-4 text-gray-400 text-sm"><li><a href="about.html">About</a></li><li><a href="sermons.html">Sermons</a></li><li><a href="events.html">Events</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+                <div><h4 class="text-white font-semibold mb-6">Resources</h4><ul class="space-y-4 text-gray-400 text-sm"><li><a href="blog.html">Blog</a></li><li><a href="devotionals.html">Devotionals</a></li><li><a href="testimonies.html">Testimonies</a></li><li><a href="gallery.html">Gallery</a></li></ul></div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 mt-12 flex justify-between text-sm text-gray-500">
+                <p>&copy; 2026 RCCG Mobile World.</p>
+                <div class="space-x-4"><a href="privacy-policy.html">Privacy</a><a href="terms-of-service.html">Terms</a></div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

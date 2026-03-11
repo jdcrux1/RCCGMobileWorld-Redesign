@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Give — RCCG Mobile World</title>
+    <meta name="description" content="Support the ministry of RCCG. Your generous giving helps us spread the gospel and impact lives around the world.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    },
+                    colors: {
+                        brand: {
+                            base: '#0f172a',
+                            light: '#1e293b',
+                            accent: '#3b82f6',
+                            gold: '#d97706',
+                            goldlight: '#fcd34d',
+                            green: '#22c55e',
+                            greendark: '#16a34a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #020617; color: white; }
+        
+        .glass-nav {
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-primary {
+            background: #22c55e;
+            color: #020617;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #4ade80;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.3);
+        }
+
+        .page-hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            padding: 180px 0 80px;
+            text-align: center;
+        }
+
+        .page-hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .page-hero-subtitle {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        footer {
+            background: #020617;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #22c55e;
+            color: #020617;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
+            cursor: pointer;
+            z-index: 4000;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: all 0.4s ease;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .giving-option {
+            background: rgba(30, 41, 59, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .giving-option:hover, .giving-option.active {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .giving-amount {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .giving-amount:hover, .giving-amount.active {
+            border-color: #22c55e;
+            color: #22c55e;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="../index3.html" class="font-serif text-2xl font-bold tracking-tight text-white">
+                        RCCG<span class="text-brand-green">.</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="../index3.html" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="about.html" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="sermons.html" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Sermons</a>
+                    <a href="events.html" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Events</a>
+                    <a href="contact.html" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Contact</a>
+                    <div class="pl-4 border-l border-gray-700 flex gap-4 items-center">
+                        <a href="give.html" class="text-sm font-medium text-white btn-primary px-5 py-2 rounded-full">Give</a>
+                    </div>
+                </div>
+                <div class="flex md:hidden items-center gap-2">
+                    <button class="text-gray-300 hover:text-white p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="max-w-4xl mx-auto px-4">
+            <svg class="w-16 h-16 mx-auto mb-6 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            <h1 class="page-hero-title">Support the Ministry</h1>
+            <p class="page-hero-subtitle">Your generous giving enables us to spread the gospel, support missionaries, and impact lives around the world.</p>
+        </div>
+    </section>
+
+    <!-- Giving Options -->
+    <section class="py-20 bg-[#020617]">
+        <div class="max-w-4xl mx-auto px-4">
+            <!-- Giving Type -->
+            <div class="mb-8">
+                <h3 class="text-white font-semibold mb-4">I want to give towards:</h3>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="giving-option p-6 rounded-xl text-center" onclick="selectGivingType(this, 'tithe')">
+                        <svg class="w-10 h-10 mx-auto mb-3 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2v20M2 12h20"></path>
+                        </svg>
+                        <h4 class="font-semibold text-white">Tithe</h4>
+                    </div>
+                    <div class="giving-option p-6 rounded-xl text-center" onclick="selectGivingType(this, 'offering')">
+                        <svg class="w-10 h-10 mx-auto mb-3 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                        <h4 class="font-semibold text-white">Offering</h4>
+                    </div>
+                    <div class="giving-option p-6 rounded-xl text-center" onclick="selectGivingType(this, 'seed')">
+                        <svg class="w-10 h-10 mx-auto mb-3 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                        </svg>
+                        <h4 class="font-semibold text-white">Seed Faith</h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Amount -->
+            <div class="mb-8">
+                <h3 class="text-white font-semibold mb-4">Select Amount</h3>
+                <div class="grid grid-cols-3 md:grid-cols-6 gap-4 mb-4">
+                    <div class="giving-amount p-4 rounded-xl text-center font-semibold" onclick="selectAmount(this, 1000)">₦1,000</div>
+                    <div class="giving-amount p-4 rounded-xl text-center font-semibold" onclick="selectAmount(this, 5000)">₦5,000</div>
+                    <div class="giving-amount p-4 rounded-xl text-center font-semibold" onclick="selectAmount(this, 10000)">₦10,000</div>
+                    <div class="giving-amount p-4 rounded-xl text-center font-semibold" onclick="selectAmount(this, 25000)">₦25,000</div>
+                    <div class="giving-amount p-4 rounded-xl text-center font-semibold" onclick="selectAmount(this, 50000)">₦50,000</div>
+                    <div class="giving-amount p-4 rounded-xl text-center font-semibold" onclick="selectAmount(this, 100000)">₦100,000</div>
+                </div>
+                <div class="relative">
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">₦</span>
+                    <input type="number" class="form-input pl-10" placeholder="Other amount">
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <button class="btn-primary w-full py-4 rounded-xl text-lg font-semibold" onclick="proceedToGive()">
+                Proceed to Give
+            </button>
+
+            <p class="text-gray-500 text-center mt-6 text-sm">
+                Secure payment powered by RCCG Payments. Your giving is tax-deductible.
+            </p>
+        </div>
+    </section>
+
+    <!-- Ways to Give -->
+    <section class="py-16 bg-[#0f172a]">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="font-serif text-3xl font-bold text-white text-center mb-12">Other Ways to Give</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-800/50 p-8 rounded-2xl">
+                    <h3 class="font-serif text-xl font-bold text-white mb-4">Bank Transfer</h3>
+                    <p class="text-gray-400 mb-4">Direct bank transfer to RCCG account</p>
+                    <div class="bg-gray-900 p-4 rounded-lg">
+                        <p class="text-gray-400 text-sm">Account Name:</p>
+                        <p class="text-white font-semibold">RCCG Global</p>
+                        <p class="text-gray-400 text-sm mt-2">Account Number:</p>
+                        <p class="text-white font-semibold">1234567890</p>
+                        <p class="text-gray-400 text-sm mt-2">Bank:</p>
+                        <p class="text-white font-semibold">First Bank</p>
+                    </div>
+                </div>
+                <div class="bg-gray-800/50 p-8 rounded-2xl">
+                    <h3 class="font-serif text-xl font-bold text-white mb-4">USSD</h3>
+                    <p class="text-gray-400 mb-4">Dial *322*Amount*Account#</p>
+                    <p class="text-gray-500 text-sm">Quick and easy giving via USSD</p>
+                </div>
+                <div class="bg-gray-800/50 p-8 rounded-2xl">
+                    <h3 class="font-serif text-xl font-bold text-white mb-4">Visit Us</h3>
+                    <p class="text-gray-400 mb-4">Give in person at any of our centers</p>
+                    <p class="text-gray-500 text-sm">During service hours</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <a href="../index3.html" class="font-serif text-2xl font-bold tracking-tight text-white mb-4 block">
+                        RCCG<span class="text-brand-green">.</span>
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6 max-w-md">
+                        A place where faith grows, hearts connect, and lives are transformed through the power of God's love.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-4">
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition-colors text-sm">About Us</a></li>
+                        <li><a href="sermons.html" class="text-gray-400 hover:text-white transition-colors text-sm">Sermons</a></li>
+                        <li><a href="events.html" class="text-gray-400 hover:text-white transition-colors text-sm">Events</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition-colors text-sm">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-6">Resources</h4>
+                    <ul class="space-y-4">
+                        <li><a href="blog.html" class="text-gray-400 hover:text-white transition-colors text-sm">Blog</a></li>
+                        <li><a href="devotionals.html" class="text-gray-400 hover:text-white transition-colors text-sm">Devotionals</a></li>
+                        <li><a href="testimonies.html" class="text-gray-400 hover:text-white transition-colors text-sm">Testimonies</a></li>
+                        <li><a href="gallery.html" class="text-gray-400 hover:text-white transition-colors text-sm">Gallery</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p>&copy; 2026 RCCG Mobile World. All rights reserved.</p>
+                <div class="mt-4 md:mt-0 space-x-4">
+                    <a href="privacy-policy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="terms-of-service.html" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button id="backToTop" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+        </svg>
+    </button>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const backToTopBtn = document.getElementById('backToTop');
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        function selectGivingType(element, type) {
+            document.querySelectorAll('.giving-option').forEach(opt => opt.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function selectAmount(element, amount) {
+            document.querySelectorAll('.giving-amount').forEach(amt => amt.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function proceedToGive() {
+            alert('Redirecting to secure payment portal...');
+        }
+    </script>
+</body>
+
+</html>

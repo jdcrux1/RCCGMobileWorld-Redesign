@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details — RCCG Mobile World</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] }, colors: { brand: { base: '#0f172a', light: '#1e293b', green: '#22c55e' } } } } }</script>
+    <style>
+        body { background-color: #020617; color: white; }
+        .glass-nav { background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(12px); }
+        .btn-primary { background: #22c55e; color: #020617; }
+        .page-hero { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); padding: 180px 0 80px; text-align: center; }
+        .page-hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; margin-bottom: 20px; }
+        footer { background: #020617; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <nav class="fixed w-full z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-20">
+                <a href="../index3.html" class="font-serif text-2xl font-bold text-white">RCCG<span class="text-brand-green">.</span></a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index3.html" class="text-sm text-gray-300">Home</a>
+                    <a href="about.html" class="text-sm text-gray-300">About</a>
+                    <a href="sermons.html" class="text-sm text-gray-300">Sermons</a>
+                    <a href="events.html" class="text-sm text-white border-b border-brand-green">Events</a>
+                    <a href="contact.html" class="text-sm text-gray-300">Contact</a>
+                    <a href="give.html" class="btn-primary px-5 py-2 rounded-full text-sm">Give</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <p class="text-brand-green font-semibold uppercase tracking-wider mb-4">Event Details</p>
+        <h1 class="page-hero-title" id="eventTitle">Event Title</h1>
+    </section>
+
+    <section class="py-20 bg-[#020617]">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="bg-gray-800/30 border border-gray-700/50 rounded-2xl overflow-hidden">
+                <div class="h-64 md:h-80 bg-gray-700 relative">
+                    <img id="eventImage" src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=1200" alt="Event" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
+                </div>
+                
+                <div class="p-8 md:p-12">
+                    <div class="flex flex-wrap gap-4 mb-8">
+                        <div class="flex items-center gap-2 text-gray-300">
+                            <svg class="w-5 h-5 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            <span id="eventDate">Date</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-gray-300">
+                            <svg class="w-5 h-5 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span id="eventTime">Time</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-gray-300">
+                            <svg class="w-5 h-5 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span id="eventVenue">Venue</span>
+                        </div>
+                    </div>
+
+                    <h2 class="font-serif text-2xl font-bold text-white mb-4">About This Event</h2>
+                    <p id="eventDescription" class="text-gray-300 leading-relaxed mb-8">Event description goes here.</p>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="events.html" class="btn-primary px-8 py-3 rounded-full font-semibold inline-flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12"></path>
+                            </svg>
+                            Back to Events
+                        </a>
+                        <a href="contact.html" class="border border-brand-green text-brand-green px-8 py-3 rounded-full font-semibold hover:bg-brand-green hover:text-gray-900 transition-colors">
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-12">
+                <div class="col-span-2">
+                    <a href="../index3.html" class="font-serif text-2xl font-bold text-white mb-4 block">RCCG<span class="text-brand-green">.</span></a>
+                    <p class="text-gray-400 text-sm">A place where faith grows.</p>
+                </div>
+                <div><h4 class="text-white font-semibold mb-6">Quick Links</h4><ul class="space-y-4 text-gray-400 text-sm"><li><a href="about.html">About</a></li><li><a href="sermons.html">Sermons</a></li><li><a href="events.html">Events</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+                <div><h4 class="text-white font-semibold mb-6">Resources</h4><ul class="space-y-4 text-gray-400 text-sm"><li><a href="blog.html">Blog</a></li><li><a href="devotionals.html">Devotionals</a></li><li><a href="testimonies.html">Testimonies</a></li><li><a href="gallery.html">Gallery</a></li></ul></div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 mt-12 flex justify-between text-sm text-gray-500">
+                <p>&copy; 2026 RCCG Mobile World.</p>
+                <div class="space-x-4"><a href="privacy-policy.html">Privacy</a><a href="terms-of-service.html">Terms</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const eventId = urlParams.get('id');
+        
+        const events = {
+            'thanksgiving': {
+                title: 'Thanksgiving Sunday',
+                date: 'February 08, 2026',
+                time: '8:00 AM',
+                venue: 'RCCG Headquarters, Lagos',
+                description: 'Join us for a powerful thanksgiving service as we celebrate God\'s faithfulness. This special Sunday is dedicated to giving thanks for all the blessings we have received throughout the year. Come expecting great worship, inspiring messages, and a time of celebration with our church family.',
+                image: 'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=1200'
+            },
+            'youth-summit': {
+                title: 'Youth Summit 2026',
+                date: 'February 14, 2026',
+                time: '10:00 AM',
+                venue: 'Redemption Camp',
+                description: 'Empowering the next generation for excellence and leadership. This youth summit brings together young people from across the nation for a day of inspiration, worship, and empowerment. Featuring dynamic speakers, worship sessions, and networking opportunities.',
+                image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200'
+            },
+            'worship-conference': {
+                title: 'Annual Worship Conference',
+                date: 'March 15, 2026',
+                time: '9:00 AM',
+                venue: 'Main Auditorium',
+                description: 'A time of worship, prayer, and spiritual empowerment. Join us for our annual worship conference where we will encounter God through praise and worship, receive prophetic words, and be empowered for the year ahead.',
+                image: 'https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=1200'
+            }
+        };
+
+        const event = events[eventId];
+        if (event) {
+            document.getElementById('eventTitle').textContent = event.title;
+            document.getElementById('eventDate').textContent = event.date;
+            document.getElementById('eventTime').textContent = event.time;
+            document.getElementById('eventVenue').textContent = event.venue;
+            document.getElementById('eventDescription').textContent = event.description;
+            document.getElementById('eventImage').src = event.image;
+            document.title = event.title + ' — RCCG Mobile World';
+        }
+    </script>
+</body>
+
+</html>

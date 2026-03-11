@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devotionals — RCCG Mobile World</title>
+    <meta name="description" content="Start your day with powerful daily devotionals from RCCG. Grow in faith with inspirational messages.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] },
+                    colors: { brand: { base: '#0f172a', light: '#1e293b', green: '#22c55e' } }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #020617; color: white; }
+        .glass-nav { background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .btn-primary { background: #22c55e; color: #020617; }
+        .page-hero { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); padding: 180px 0 80px; text-align: center; }
+        .page-hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; margin-bottom: 20px; }
+        footer { background: #020617; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: #22c55e; color: #020617; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 4000; opacity: 0; transform: translateY(20px); pointer-events: none; transition: all 0.4s ease; }
+        .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        .devotional-card { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.4s ease; }
+        .devotional-card:hover { transform: translateY(-8px); border-color: rgba(34, 197, 94, 0.3); }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <nav class="fixed w-full z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-20">
+                <a href="../index3.html" class="font-serif text-2xl font-bold text-white">RCCG<span class="text-brand-green">.</span></a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index3.html" class="text-sm text-gray-300">Home</a>
+                    <a href="about.html" class="text-sm text-gray-300">About</a>
+                    <a href="sermons.html" class="text-sm text-gray-300">Sermons</a>
+                    <a href="events.html" class="text-sm text-gray-300">Events</a>
+                    <a href="contact.html" class="text-sm text-gray-300">Contact</a>
+                    <a href="give.html" class="btn-primary px-5 py-2 rounded-full text-sm">Give</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <p class="text-brand-green font-semibold uppercase tracking-wider mb-4">Daily Devotionals</p>
+        <h1 class="page-hero-title">Grow in Faith Daily</h1>
+        <p class="text-gray-400 max-w-xl mx-auto">Start your day with inspirational messages that will strengthen your faith and draw you closer to God.</p>
+    </section>
+
+    <section class="py-20 bg-[#020617]">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Devotional 1 -->
+                <div class="devotional-card p-8 rounded-2xl">
+                    <p class="text-brand-green font-semibold mb-2">February 10, 2026</p>
+                    <h3 class="font-serif text-2xl font-bold text-white mb-4">Walking in Victory</h3>
+                    <p class="text-gray-400 mb-4">"But thanks be to God, which gives us the victory through our Lord Jesus Christ." - 1 Corinthians 15:57</p>
+                    <p class="text-gray-300 mb-6">Today, remember that victory is already yours through Christ. No matter what challenges you face, you have the power to overcome them.</p>
+                    <a href="#" class="text-brand-green font-semibold">Read Full Devotional →</a>
+                </div>
+
+                <!-- Devotional 2 -->
+                <div class="devotional-card p-8 rounded-2xl">
+                    <p class="text-brand-green font-semibold mb-2">February 9, 2026</p>
+                    <h3 class="font-serif text-2xl font-bold text-white mb-4">Trusting God's Timing</h3>
+                    <p class="text-gray-400 mb-4">"For My thoughts are not your thoughts, nor are your ways My ways, says the LORD." - Isaiah 55:8</p>
+                    <p class="text-gray-300 mb-6">God's timing is perfect. Even when things don't happen as we expect, we can trust that He has the best plan for our lives.</p>
+                    <a href="#" class="text-brand-green font-semibold">Read Full Devotional →</a>
+                </div>
+
+                <!-- Devotional 3 -->
+                <div class="devotional-card p-8 rounded-2xl">
+                    <p class="text-brand-green font-semibold mb-2">February 8, 2026</p>
+                    <h3 class="font-serif text-2xl font-bold text-white mb-4">The Power of Praise</h3>
+                    <p class="text-gray-400 mb-4">"Enter into His gates with thanksgiving and into His courts with praise." - Psalm 100:4</p>
+                    <p class="text-gray-300 mb-6">Praise changes atmospheres. No matter your situation, lifting up God's name can transform your circumstances.</p>
+                    <a href="#" class="text-brand-green font-semibold">Read Full Devotional →</a>
+                </div>
+
+                <!-- Devotional 4 -->
+                <div class="devotional-card p-8 rounded-2xl">
+                    <p class="text-brand-green font-semibold mb-2">February 7, 2026</p>
+                    <h3 class="font-serif text-2xl font-bold text-white mb-4">Love in Action</h3>
+                    <p class="text-gray-400 mb-4">"By this everyone will know that you are My disciples, if you love one another." - John 13:35</p>
+                    <p class="text-gray-300 mb-6">True faith is demonstrated through love. Let your love for others be a reflection of God's love for you.</p>
+                    <a href="#" class="text-brand-green font-semibold">Read Full Devotional →</a>
+                </div>
+
+                <!-- Devotional 5 -->
+                <div class="devotional-card p-8 rounded-2xl">
+                    <p class="text-brand-green font-semibold mb-2">February 6, 2026</p>
+                    <h3 class="font-serif text-2xl font-bold text-white mb-4">Faith Over Fear</h3>
+                    <p class="text-gray-400 mb-4">"Fear not, for I am with you; be not dismayed, for I am your God." - Isaiah 41:10</p>
+                    <p class="text-gray-300 mb-6">When fear tries to creep in, remember God's promises. He is always with you, guiding and protecting you.</p>
+                    <a href="#" class="text-brand-green font-semibold">Read Full Devotional →</a>
+                </div>
+
+                <!-- Devotional 6 -->
+                <div class="devotional-card p-8 rounded-2xl bg-gradient-to-br from-brand-green/10 to-transparent border-brand-green/20">
+                    <div class="text-center">
+                        <h3 class="font-serif text-2xl font-bold text-white mb-4">Subscribe</h3>
+                        <p class="text-gray-400 mb-6">Get daily devotionals delivered to your inbox</p>
+                        <input type="email" placeholder="Your email" class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white mb-4">
+                        <button class="btn-primary w-full py-3 rounded-lg font-semibold">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-12">
+                <div class="col-span-2">
+                    <a href="../index3.html" class="font-serif text-2xl font-bold text-white mb-4 block">RCCG<span class="text-brand-green">.</span></a>
+                    <p class="text-gray-400 text-sm">A place where faith grows.</p>
+                </div>
+                <div><h4 class="text-white font-semibold mb-6">Quick Links</h4><ul class="space-y-4 text-gray-400 text-sm"><li><a href="about.html">About</a></li><li><a href="sermons.html">Sermons</a></li><li><a href="events.html">Events</a></li></ul></div>
+                <div><h4 class="text-white font-semibold mb-6">Resources</h4><ul class="space-y-4 text-gray-400 text-sm"><li><a href="blog.html">Blog</a></li><li><a href="devotionals.html">Devotionals</a></li><li><a href="testimonies.html">Testimonies</a></li></ul></div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 mt-12 flex justify-between text-sm text-gray-500">
+                <p>&copy; 2026 RCCG Mobile World.</p>
+                <div class="space-x-4"><a href="privacy-policy.html">Privacy</a><a href="terms-of-service.html">Terms</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <script>window.addEventListener('scroll', () => document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 500));</script>
+    <button id="backToTop" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+</body>
+
+</html>

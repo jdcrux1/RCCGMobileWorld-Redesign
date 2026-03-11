@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sermons — RCCG Mobile World</title>
+    <meta name="description" content="Watch and listen to powerful sermons from RCCG. Browse our archive of inspirational messages from our pastors.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    },
+                    colors: {
+                        brand: {
+                            base: '#0f172a',
+                            light: '#1e293b',
+                            accent: '#3b82f6',
+                            gold: '#d97706',
+                            goldlight: '#fcd34d',
+                            green: '#22c55e',
+                            greendark: '#16a34a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* --- SHARED STYLES FROM INDEX3 --- */
+        body { background-color: #020617; color: white; }
+        
+        .glass-nav {
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-primary {
+            background: #22c55e;
+            color: #020617;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #4ade80;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.3);
+        }
+
+        .btn-outline {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: #020617;
+            border-color: white;
+        }
+
+        .content-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(34, 197, 94, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            padding: 180px 0 80px;
+            text-align: center;
+        }
+
+        .page-hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .page-hero-subtitle {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .page-section {
+            padding: 80px 0;
+            background: #020617;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-label {
+            color: #22c55e;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.875rem;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        footer {
+            background: #020617;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #22c55e;
+            color: #020617;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
+            cursor: pointer;
+            z-index: 4000;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: all 0.4s ease;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            background: #4ade80;
+        }
+
+        .filter-btn {
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            cursor: pointer;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #22c55e;
+            color: #020617;
+            border-color: #22c55e;
+        }
+
+        .video-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 7000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(2, 6, 23, 0.95);
+        }
+
+        .video-modal.active {
+            display: flex;
+        }
+
+        .video-modal-content {
+            width: 90%;
+            max-width: 900px;
+            aspect-ratio: 16 / 9;
+            position: relative;
+        }
+
+        .video-modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            border: none;
+        }
+
+        .video-modal-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .video-modal-close:hover {
+            background: #22c55e;
+            color: #020617;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="../index3.html" class="font-serif text-2xl font-bold tracking-tight text-white">
+                        RCCG<span class="text-brand-green">.</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="../index3.html" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="about.html" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="sermons.html" class="text-sm font-medium text-white border-b border-brand-green pb-1">Sermons</a>
+                    <a href="events.html" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Events</a>
+                    <a href="contact.html" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Contact</a>
+                    <div class="pl-4 border-l border-gray-700 flex gap-4 items-center">
+                        <a href="give.html" class="text-sm font-medium text-white btn-primary px-5 py-2 rounded-full">Give</a>
+                    </div>
+                </div>
+                <div class="flex md:hidden items-center gap-2">
+                    <button class="text-gray-300 hover:text-white p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="max-w-4xl mx-auto px-4">
+            <p class="section-label">Sermons</p>
+            <h1 class="page-hero-title">Watch & Listen</h1>
+            <p class="page-hero-subtitle">Be inspired by powerful messages from our pastors. Browse our archive of sermons and grow in your faith.</p>
+        </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="py-8 bg-[#020617] border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-wrap gap-4 justify-center">
+                <button class="filter-btn active">All Sermons</button>
+                <button class="filter-btn">Sunday Service</button>
+                <button class="filter-btn">Holy Ghost Service</button>
+                <button class="filter-btn">Youth</button>
+                <button class="filter-btn">Women</button>
+                <button class="filter-btn">Men</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sermons Grid -->
+    <section class="page-section">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Sermon Card 1 -->
+                <div class="content-card rounded-2xl overflow-hidden cursor-pointer group" onclick="playVideo('I3a-UOO0j1M')">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://img.youtube.com/vi/I3a-UOO0j1M/maxresdefault.jpg" alt="Sermon" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div class="w-16 h-16 rounded-full bg-brand-green flex items-center justify-center">
+                                <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4 bg-brand-green text-[#020617] px-3 py-1 rounded-full text-xs font-bold">
+                            NEW
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-brand-green text-sm font-semibold mb-2">February 2026</p>
+                        <h3 class="font-serif text-xl font-bold text-white mb-2">Going Higher Part 75</h3>
+                        <p class="text-gray-400 text-sm mb-4">Pastor E.A. Adeboye</p>
+                        <div class="flex items-center gap-2 text-gray-500 text-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            45 min
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sermon Card 2 -->
+                <div class="content-card rounded-2xl overflow-hidden cursor-pointer group" onclick="playVideo('ng03NChF-Vw')">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://img.youtube.com/vi/ng03NChF-Vw/maxresdefault.jpg" alt="Sermon" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div class="w-16 h-16 rounded-full bg-brand-green flex items-center justify-center">
+                                <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-brand-green text-sm font-semibold mb-2">January 2026</p>
+                        <h3 class="font-serif text-xl font-bold text-white mb-2">Holy Ghost Service</h3>
+                        <p class="text-gray-400 text-sm mb-4">Pastor E.A. Adeboye</p>
+                        <div class="flex items-center gap-2 text-gray-500 text-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            2 hrs
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sermon Card 3 -->
+                <div class="content-card rounded-2xl overflow-hidden cursor-pointer group" onclick="playVideo('vJ3VrKFycNI')">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://img.youtube.com/vi/vJ3VrKFycNI/maxresdefault.jpg" alt="Sermon" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div class="w-16 h-16 rounded-full bg-brand-green flex items-center justify-center">
+                                <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-brand-green text-sm font-semibold mb-2">December 2025</p>
+                        <h3 class="font-serif text-xl font-bold text-white mb-2">Divine Acceleration</h3>
+                        <p class="text-gray-400 text-sm mb-4">Pastor Folu Adeboye</p>
+                        <div class="flex items-center gap-2 text-gray-500 text-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            52 min
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sermon Card 4 -->
+                <div class="content-card rounded-2xl overflow-hidden cursor-pointer group" onclick="playVideo('taRwgX40TSg')">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://img.youtube.com/vi/taRwgX40TSg/maxresdefault.jpg" alt="Sermon" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div class="w-16 h-16 rounded-full bg-brand-green flex items-center justify-center">
+                                <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold animate-pulse">
+                            LIVE
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-brand-green text-sm font-semibold mb-2">Live Service</p>
+                        <h3 class="font-serif text-xl font-bold text-white mb-2">RCCG Live Service</h3>
+                        <p class="text-gray-400 text-sm mb-4">RCCG Global</p>
+                        <div class="flex items-center gap-2 text-gray-500 text-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            Ongoing
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sermon Card 5 -->
+                <div class="content-card rounded-2xl overflow-hidden cursor-pointer group">
+                    <div class="relative h-56 overflow-hidden bg-gradient-to-br from-brand-light to-brand-base flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-brand-green/20 flex items-center justify-center">
+                                <svg class="w-8 h-8 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                                    <line x1="12" y1="19" x2="12" y2="23"></line>
+                                    <line x1="8" y1="23" x2="16" y2="23"></line>
+                                </svg>
+                            </div>
+                            <p class="text-white font-semibold">Listen to Audio</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-brand-green text-sm font-semibold mb-2">Audio</p>
+                        <h3 class="font-serif text-xl font-bold text-white mb-2">Podcast Archive</h3>
+                        <p class="text-gray-400 text-sm mb-4">All previous sermons</p>
+                        <div class="flex items-center gap-2 text-gray-500 text-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            500+ sermons
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sermon Card 6 -->
+                <div class="content-card rounded-2xl overflow-hidden cursor-pointer group">
+                    <div class="relative h-56 overflow-hidden bg-gradient-to-br from-brand-light to-brand-base flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-brand-green/20 flex items-center justify-center">
+                                <svg class="w-8 h-8 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="3" y1="9" x2="21" y2="9"></line>
+                                    <line x1="9" y1="21" x2="9" y2="9"></line>
+                                </svg>
+                            </div>
+                            <p class="text-white font-semibold">View All Series</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-brand-green text-sm font-semibold mb-2">Series</p>
+                        <h3 class="font-serif text-xl font-bold text-white mb-2">Sermon Series</h3>
+                        <p class="text-gray-400 text-sm mb-4">Browse by topic</p>
+                        <div class="flex items-center gap-2 text-gray-500 text-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            50+ series
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <button class="video-modal-close" onclick="closeVideo()">× Close</button>
+            <iframe id="videoFrame" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <a href="../index3.html" class="font-serif text-2xl font-bold tracking-tight text-white mb-4 block">
+                        RCCG<span class="text-brand-green">.</span>
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6 max-w-md">
+                        A place where faith grows, hearts connect, and lives are transformed through the power of God's love.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-brand-green transition-all">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-brand-green transition-all">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-4">
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition-colors text-sm">About Us</a></li>
+                        <li><a href="sermons.html" class="text-gray-400 hover:text-white transition-colors text-sm">Sermons</a></li>
+                        <li><a href="events.html" class="text-gray-400 hover:text-white transition-colors text-sm">Events</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition-colors text-sm">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-6">Resources</h4>
+                    <ul class="space-y-4">
+                        <li><a href="blog.html" class="text-gray-400 hover:text-white transition-colors text-sm">Blog</a></li>
+                        <li><a href="devotionals.html" class="text-gray-400 hover:text-white transition-colors text-sm">Devotionals</a></li>
+                        <li><a href="testimonies.html" class="text-gray-400 hover:text-white transition-colors text-sm">Testimonies</a></li>
+                        <li><a href="gallery.html" class="text-gray-400 hover:text-white transition-colors text-sm">Gallery</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p>&copy; 2026 RCCG Mobile World. All rights reserved.</p>
+                <div class="mt-4 md:mt-0 space-x-4">
+                    <a href="privacy-policy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="terms-of-service.html" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button id="backToTop" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+        </svg>
+    </button>
+
+    <script>
+        // Back to Top
+        window.addEventListener('scroll', () => {
+            const backToTopBtn = document.getElementById('backToTop');
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        // Video Modal
+        function playVideo(videoId) {
+            document.getElementById('videoFrame').src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            document.getElementById('videoModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideo() {
+            document.getElementById('videoModal').classList.remove('active');
+            document.getElementById('videoFrame').src = '';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

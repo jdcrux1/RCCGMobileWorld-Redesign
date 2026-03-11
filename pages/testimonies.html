@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonies — RCCG Mobile World</title>
+    <meta name="description" content="Read powerful testimonies from RCCG members. See how God is working in the lives of our community.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] },
+                    colors: { brand: { base: '#0f172a', light: '#1e293b', green: '#22c55e' } }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #020617; color: white; }
+        .glass-nav { background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(12px); }
+        .btn-primary { background: #22c55e; color: #020617; }
+        .btn-outline { border: 2px solid rgba(255,255,255,0.3); color: white; }
+        .page-hero { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); padding: 180px 0 80px; text-align: center; }
+        .page-hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; margin-bottom: 20px; }
+        footer { background: #020617; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: #22c55e; color: #020617; border: none; border-radius: 50%; z-index: 4000; opacity: 0; transform: translateY(20px); pointer-events: none; }
+        .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        .testimonial-card { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.4s ease; }
+        .testimonial-card:hover { transform: translateY(-8px); border-color: rgba(34, 197, 94, 0.3); }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <nav class="fixed w-full z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-20">
+                <a href="../index3.html" class="font-serif text-2xl font-bold text-white">RCCG<span class="text-brand-green">.</span></a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index3.html" class="text-sm text-gray-300">Home</a>
+                    <a href="about.html" class="text-sm text-gray-300">About</a>
+                    <a href="sermons.html" class="text-sm text-gray-300">Sermons</a>
+                    <a href="events.html" class="text-sm text-gray-300">Events</a>
+                    <a href="contact.html" class="text-sm text-gray-300">Contact</a>
+                    <a href="give.html" class="btn-primary px-5 py-2 rounded-full text-sm">Give</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <p class="text-brand-green font-semibold uppercase tracking-wider mb-4">Testimonies</p>
+        <h1 class="page-hero-title">What God Has Done</h1>
+        <p class="text-gray-400 max-w-xl mx-auto">Read inspiring stories of how God is working in the lives of our members.</p>
+    </section>
+
+    <section class="py-20 bg-[#020617]">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimony 1 -->
+                <div class="testimonial-card p-8 rounded-2xl">
+                    <svg class="w-10 h-10 text-brand-green mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"></path><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"></path></svg>
+                    <p class="text-gray-300 leading-relaxed mb-6">"After years of suffering from a chronic illness, God healed me completely during a prayer session. I am forever grateful for this community of faith."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-brand-green/20 flex items-center justify-center"><span class="text-brand-green font-bold">S</span></div>
+                        <div><p class="text-white font-semibold">Sarah Johnson</p><p class="text-gray-500 text-sm">Healed from chronic illness</p></div>
+                    </div>
+                </div>
+
+                <!-- Testimony 2 -->
+                <div class="testimonial-card p-8 rounded-2xl">
+                    <svg class="w-10 h-10 text-brand-green mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"></path><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"></path></svg>
+                    <p class="text-gray-300 leading-relaxed mb-6">"Through faithful tithing and prayers, my business went from almost closing to flourishing. God is faithful!"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-brand-green/20 flex items-center justify-center"><span class="text-brand-green font-bold">M</span></div>
+                        <div><p class="text-white font-semibold">Michael Adeyemi</p><p class="text-gray-500 text-sm">Business breakthrough</p></div>
+                    </div>
+                </div>
+
+                <!-- Testimony 3 -->
+                <div class="testimonial-card p-8 rounded-2xl">
+                    <svg class="w-10 h-10 text-brand-green mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"></path><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"></path></svg>
+                    <p class="text-gray-300 leading-relaxed mb-6">"Our marriage was on the brink of divorce, but through counseling and prayer, we found love again. Praise God!"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-brand-green/20 flex items-center justify-center"><span class="text-brand-green font-bold">G</span></div>
+                        <div><p class="text-white font-semibold">Grace Okoro</p><p class="text-gray-500 text-sm">Marriage restoration</p></div>
+                    </div>
+                </div>
+
+                <!-- More testimonies... -->
+                <div class="testimonial-card p-8 rounded-2xl">
+                    <svg class="w-10 h-10 text-brand-green mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"></path><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"></path></svg>
+                    <p class="text-gray-300 leading-relaxed mb-6">"I was struggling with depression for years. After joining this church and finding community, I've never felt more at peace."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-brand-green/20 flex items-center justify-center"><span class="text-brand-green font-bold">J</span></div>
+                        <div><p class="text-white font-semibold">James Peters</p><p class="text-gray-500 text-sm">Mental health breakthrough</p></div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card p-8 rounded-2xl">
+                    <svg class="w-10 h-10 text-brand-green mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"></path><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"></path></svg>
+                    <p class="text-gray-300 leading-relaxed mb-6">"God provided a job opportunity when I had been unemployed for over a year. He truly cares for His children."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-brand-green/20 flex items-center justify-center"><span class="text-brand-green font-bold">A</span></div>
+                        <div><p class="text-white font-semibold">Amara Chukwu</p><p class="text-gray-500 text-sm">Job provision</p></div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card p-8 rounded-2xl bg-brand-green/5 border-brand-green/20">
+                    <div class="text-center py-8">
+                        <h3 class="font-serif text-2xl font-bold text-white mb-4">Share Your Story</h3>
+                        <p class="text-gray-400 mb-6">God has done amazing things in your life. Share your testimony to encourage others.</p>
+                        <button class="btn-outline px-8 py-3 rounded-full">Submit Testimony</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-12">
+                <div class="col-span-2">
+                    <a href="../index3.html" class="font-serif text-2xl font-bold text-white mb-4 block">RCCG<span class="text-brand-green">.</span></a>
+                    <p class="text-gray-400 text-sm">A place where faith grows.</p>
+                </div>
+                <div><h4 class="text-white font-semibold mb-6">Quick Links</h4><ul class="space-y-4 text-gray-400 text-sm"><li><a href="about.html">About</a></li><li><a href="sermons.html">Sermons</a></li><li><a href="events.html">Events</a></li></ul></div>
+                <div><h4 class="text-white font-semibold mb-6">Resources</h4><ul class="space-y-4 text-gray-400 text-sm"><li><a href="blog.html">Blog</a></li><li><a href="devotionals.html">Devotionals</a></li><li><a href="testimonies.html">Testimonies</a></li></ul></div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 mt-12 flex justify-between text-sm text-gray-500">
+                <p>&copy; 2026 RCCG Mobile World.</p>
+                <div class="space-x-4"><a href="privacy-policy.html">Privacy</a><a href="terms-of-service.html">Terms</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <script>window.addEventListener('scroll', () => document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 500));</script>
+    <button id="backToTop" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+</body>
+
+</html>

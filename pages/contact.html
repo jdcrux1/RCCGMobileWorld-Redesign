@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us — RCCG Mobile World</title>
+    <meta name="description" content="Get in touch with RCCG. We'd love to hear from you. Contact us for inquiries, prayers, or visit our church location.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    },
+                    colors: {
+                        brand: {
+                            base: '#0f172a',
+                            light: '#1e293b',
+                            accent: '#3b82f6',
+                            gold: '#d97706',
+                            goldlight: '#fcd34d',
+                            green: '#22c55e',
+                            greendark: '#16a34a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #020617; color: white; }
+        
+        .glass-nav {
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-primary {
+            background: #22c55e;
+            color: #020617;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #4ade80;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.3);
+        }
+
+        .page-hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            padding: 180px 0 80px;
+            text-align: center;
+        }
+
+        .page-hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .page-hero-subtitle {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        footer {
+            background: #020617;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #22c55e;
+            color: #020617;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
+            cursor: pointer;
+            z-index: 4000;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: all 0.4s ease;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            background: #4ade80;
+        }
+
+        .contact-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+        }
+
+        .contact-card:hover {
+            border-color: rgba(34, 197, 94, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #1e293b;
+            color: white;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: #22c55e;
+            background: #0f172a;
+        }
+
+        .form-input::placeholder {
+            color: #64748b;
+        }
+
+        textarea.form-input {
+            min-height: 150px;
+            resize: vertical;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="../index3.html" class="font-serif text-2xl font-bold tracking-tight text-white">
+                        RCCG<span class="text-brand-green">.</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="../index3.html" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="about.html" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="sermons.html" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Sermons</a>
+                    <a href="events.html" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Events</a>
+                    <a href="contact.html" class="text-sm font-medium text-white border-b border-brand-green pb-1">Contact</a>
+                    <div class="pl-4 border-l border-gray-700 flex gap-4 items-center">
+                        <a href="give.html" class="text-sm font-medium text-white btn-primary px-5 py-2 rounded-full">Give</a>
+                    </div>
+                </div>
+                <div class="flex md:hidden items-center gap-2">
+                    <button class="text-gray-300 hover:text-white p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="max-w-4xl mx-auto px-4">
+            <p class="text-brand-green font-semibold uppercase tracking-wider mb-4">Get in Touch</p>
+            <h1 class="page-hero-title">Contact Us</h1>
+            <p class="page-hero-subtitle">We'd love to hear from you. Whether you have a question, need prayer, or want to visit our church, we're here to help.</p>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="py-20 bg-[#020617]">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <!-- Phone -->
+                <div class="contact-card p-8 rounded-2xl text-center">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-brand-green/10 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white mb-2">Phone</h3>
+                    <p class="text-gray-400">+234 809 967 2327</p>
+                    <p class="text-gray-500 text-sm mt-2">Mon-Fri, 9AM-5PM</p>
+                </div>
+
+                <!-- Email -->
+                <div class="contact-card p-8 rounded-2xl text-center">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-brand-green/10 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white mb-2">Email</h3>
+                    <p class="text-gray-400">info@rccg.org</p>
+                    <p class="text-gray-500 text-sm mt-2">We respond within 24 hours</p>
+                </div>
+
+                <!-- Location -->
+                <div class="contact-card p-8 rounded-2xl text-center">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-brand-green/10 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white mb-2">Location</h3>
+                    <p class="text-gray-400">RCCG Headquarters</p>
+                    <p class="text-gray-500 text-sm mt-2">Lagos, Nigeria</p>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="max-w-2xl mx-auto">
+                <div class="contact-card p-8 rounded-2xl">
+                    <h2 class="font-serif text-2xl font-bold text-white mb-6 text-center">Send us a Message</h2>
+                    <form>
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-gray-400 text-sm font-medium mb-2">First Name</label>
+                                <input type="text" class="form-input" placeholder="John">
+                            </div>
+                            <div>
+                                <label class="block text-gray-400 text-sm font-medium mb-2">Last Name</label>
+                                <input type="text" class="form-input" placeholder="Doe">
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-400 text-sm font-medium mb-2">Email Address</label>
+                            <input type="email" class="form-input" placeholder="john@example.com">
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-400 text-sm font-medium mb-2">Subject</label>
+                            <select class="form-input">
+                                <option>General Inquiry</option>
+                                <option>Prayer Request</option>
+                                <option>Visit Our Church</option>
+                                <option>Volunteer</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-400 text-sm font-medium mb-2">Message</label>
+                            <textarea class="form-input" placeholder="How can we help you?"></textarea>
+                        </div>
+                        <button type="button" class="btn-primary w-full py-4 rounded-lg text-lg font-semibold">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Map -->
+            <div class="mt-16">
+                <div class="contact-card p-8 rounded-2xl">
+                    <h2 class="font-serif text-2xl font-bold text-white mb-6 text-center">Find Us</h2>
+                    <div class="bg-gray-800 rounded-xl h-96 flex items-center justify-center">
+                        <div class="text-center">
+                            <svg class="w-16 h-16 mx-auto mb-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <p class="text-gray-400">Map integration coming soon</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <a href="../index3.html" class="font-serif text-2xl font-bold tracking-tight text-white mb-4 block">
+                        RCCG<span class="text-brand-green">.</span>
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6 max-w-md">
+                        A place where faith grows, hearts connect, and lives are transformed through the power of God's love.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-brand-green transition-all">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-brand-green transition-all">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-4">
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition-colors text-sm">About Us</a></li>
+                        <li><a href="sermons.html" class="text-gray-400 hover:text-white transition-colors text-sm">Sermons</a></li>
+                        <li><a href="events.html" class="text-gray-400 hover:text-white transition-colors text-sm">Events</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition-colors text-sm">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-6">Resources</h4>
+                    <ul class="space-y-4">
+                        <li><a href="blog.html" class="text-gray-400 hover:text-white transition-colors text-sm">Blog</a></li>
+                        <li><a href="devotionals.html" class="text-gray-400 hover:text-white transition-colors text-sm">Devotionals</a></li>
+                        <li><a href="testimonies.html" class="text-gray-400 hover:text-white transition-colors text-sm">Testimonies</a></li>
+                        <li><a href="gallery.html" class="text-gray-400 hover:text-white transition-colors text-sm">Gallery</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p>&copy; 2026 RCCG Mobile World. All rights reserved.</p>
+                <div class="mt-4 md:mt-0 space-x-4">
+                    <a href="privacy-policy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="terms-of-service.html" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button id="backToTop" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+        </svg>
+    </button>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const backToTopBtn = document.getElementById('backToTop');
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+
+</html>
