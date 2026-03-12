@@ -155,7 +155,7 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="../index.html" class="flex items-center">
-                        <img src="../logo.png" alt="RCCG Logo" class="h-12 w-auto">
+                        <img src="../rccg-for-web.png" alt="RCCG Logo" class="h-12 w-auto">
                     </a>
                 </div>
 
@@ -257,7 +257,7 @@
                 </div>
                 <div class="relative">
                     <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">₦</span>
-                    <input type="number" class="form-input pl-10" placeholder="Other amount">
+                    <input type="number" id="customAmount" class="w-full bg-gray-800/50 border border-gray-700 rounded-xl py-4 pl-10 pr-4 text-white placeholder-gray-500 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-colors" placeholder="Other amount" oninput="handleCustomAmount()">
                 </div>
             </div>
 
@@ -309,7 +309,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
                 <div class="col-span-1 md:col-span-1">
                     <a href="../index.html" class="mb-4 block">
-                        <img src="../logo.png" alt="RCCG Logo" class="h-12 w-auto filter drop-shadow-md">
+                        <img src="../rccg-for-web.png" alt="RCCG Logo" class="h-12 w-auto filter drop-shadow-md">
                     </a>
                     <p class="text-gray-400 text-sm leading-relaxed mb-6">
                         A place where faith grows, hearts connect, and lives are transformed through the power of God's
@@ -422,10 +422,22 @@
         function selectAmount(element, amount) {
             document.querySelectorAll('.giving-amount').forEach(amt => amt.classList.remove('active'));
             element.classList.add('active');
+            // Update the custom input box with the selected amount
+            document.getElementById('customAmount').value = amount;
+        }
+
+        function handleCustomAmount() {
+            // Remove active class from buttons if user types custom amount
+            document.querySelectorAll('.giving-amount').forEach(amt => amt.classList.remove('active'));
         }
 
         function proceedToGive() {
-            alert('Redirecting to secure payment portal...');
+            const amount = document.getElementById('customAmount').value;
+            if(!amount || amount <= 0) {
+                alert('Please select or enter a valid amount.');
+                return;
+            }
+            alert('Redirecting to secure payment portal with amount: ₦' + amount);
         }
     </script>
 </body>
