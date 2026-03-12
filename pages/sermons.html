@@ -45,208 +45,68 @@
             }
         }
     </script>
-    <style>
-        /* --- SHARED STYLES FROM INDEX3 --- */
-        body { background-color: #020617; color: white; }
-        
-        .glass-nav {
-            background: rgba(2, 6, 23, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .btn-primary {
-            background: #3b82f6;
-            color: #020617;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background: #60a5fa;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
-        }
-
-        .btn-outline {
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            transition: all 0.3s ease;
-        }
-
-        .btn-outline:hover {
-            background: white;
-            color: #020617;
-            border-color: white;
-        }
-
-        .content-card {
-            background: rgba(30, 41, 59, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s ease;
-        }
-
-        .content-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(59, 130, 246, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .page-hero {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-            padding: 180px 0 80px;
-            text-align: center;
-        }
-
-        .page-hero-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            color: white;
-            margin-bottom: 20px;
-        }
-
-        .page-hero-subtitle {
-            font-size: 1.25rem;
-            color: #94a3b8;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .page-section {
-            padding: 80px 0;
-            background: #020617;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-label {
-            color: #3b82f6;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.875rem;
-            margin-bottom: 10px;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: white;
-        }
-
-        footer {
-            background: #020617;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: #3b82f6;
-            color: #020617;
-            border: none;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
-            cursor: pointer;
-            z-index: 4000;
-            opacity: 0;
-            transform: translateY(20px);
-            pointer-events: none;
-            transition: all 0.4s ease;
-        }
-
-        .back-to-top.visible {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-
-        .back-to-top:hover {
-            transform: translateY(-5px);
-            background: #60a5fa;
-        }
-
-        .filter-btn {
-            padding: 10px 24px;
-            border-radius: 50px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #94a3b8;
-            cursor: pointer;
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            background: #3b82f6;
-            color: #020617;
-            border-color: #3b82f6;
-        }
-
-        .video-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 7000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            background: rgba(2, 6, 23, 0.95);
-        }
-
-        .video-modal.active {
-            display: flex;
-        }
-
-        .video-modal-content {
-            width: 90%;
-            max-width: 900px;
-            aspect-ratio: 16 / 9;
-            position: relative;
-        }
-
-        .video-modal-content iframe {
-            width: 100%;
-            height: 100%;
-            border-radius: 12px;
-            border: none;
-        }
-
-        .video-modal-close {
-            position: absolute;
-            top: -50px;
-            right: 0;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        .video-modal-close:hover {
-            background: #3b82f6;
-            color: #020617;
-        }
-    </style>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../pages-shared.css">
 </head>
 
 <body class="antialiased">
+
+    <!-- SEARCH OVERLAY -->
+    <div class="search-overlay" id="searchOverlay">
+        <button class="search-close-btn" onclick="toggleSearch()">
+            <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" viewBox="0 0 24 24">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <div class="search-content-wrapper">
+            <input type="text" class="search-field" id="mainSearchInput" placeholder="Search for sermons, events...">
+            <div class="search-submit-icon">
+                <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOGIN DRAWER -->
+    <div class="login-overlay-bg" id="loginOverlayBg" onclick="toggleLogin()"></div>
+    <div class="login-drawer" id="loginDrawer">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="!mb-0">Login</h2>
+            <button onclick="toggleLogin()" class="text-gray-400 hover:text-white transition-colors">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="login-group"><label>Username</label><input type="text" class="login-input"
+                placeholder="Enter username"></div>
+        <div class="login-group"><label>Password</label><input type="password" class="login-input"
+                placeholder="Enter password"></div>
+        <button class="login-btn" onclick="toggleLogin()">Login</button>
+        <p class="text-xs text-gray-500 mt-6 text-center cursor-pointer hover:text-brand-accent transition-colors">
+            Forgot password?</p>
+    </div>
+
+    <!-- VIDEO MODAL -->
+    <div id="liveStreamModal" class="stream-modal">
+        <div class="stream-modal-backdrop" onclick="closeLiveStream()"></div>
+        <div class="stream-modal-content">
+            <button class="close-stream-btn" onclick="closeLiveStream()">&times; Close</button>
+            <div class="video-container">
+                <iframe id="liveVideo" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0"
+                    title="Live Stream Player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
 
     <!-- Navigation -->
     <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
@@ -307,9 +167,9 @@
 
     <!-- Page Hero -->
     <section class="page-hero">
-        <div class="max-w-4xl mx-auto px-4">
-            <p class="section-label">Sermons</p>
-            <h1 class="page-hero-title">Watch & Listen</h1>
+        <div class="page-hero-content page-fade-in">
+            <span class="page-hero-label">Sermons</span>
+            <h1 class="page-hero-title">Watch & <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-brand-accent">Listen</span></h1>
             <p class="page-hero-subtitle">Be inspired by powerful messages from our pastors. Browse our archive of sermons and grow in your faith.</p>
         </div>
     </section>
@@ -510,7 +370,15 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-[#020617] pt-20 pb-10 border-t border-gray-800">
+    
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <button class="video-modal-close" onclick="closeVideo()">× Close</button>
+            <iframe id="videoFrame" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+    </div>
+<footer class="bg-[#020617] pt-20 pb-10 border-t border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
                 <div class="col-span-1 md:col-span-1">
@@ -604,24 +472,19 @@
 
     <!-- Back to Top -->
     <button id="backToTop" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <svg class="back-to-top-ring" viewBox="0 0 46 46">
+            <circle class="back-to-top-ring-bg" cx="23" cy="23" r="20" />
+            <circle class="back-to-top-ring-fill" cx="23" cy="23" r="20" id="scrollRing" />
+        </svg>
+        <svg class="back-to-top-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <line x1="12" y1="19" x2="12" y2="5"></line>
             <polyline points="5 12 12 5 19 12"></polyline>
         </svg>
     </button>
 
+    <script src="../pages-shared.js"></script>
     <script>
-        // Back to Top
-        window.addEventListener('scroll', () => {
-            const backToTopBtn = document.getElementById('backToTop');
-            if (window.scrollY > 500) {
-                backToTopBtn.classList.add('visible');
-            } else {
-                backToTopBtn.classList.remove('visible');
-            }
-        });
-
-        // Video Modal
         function playVideo(videoId) {
             document.getElementById('videoFrame').src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
             document.getElementById('videoModal').classList.add('active');
@@ -634,7 +497,6 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Filter buttons
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -643,5 +505,4 @@
         });
     </script>
 </body>
-
 </html>

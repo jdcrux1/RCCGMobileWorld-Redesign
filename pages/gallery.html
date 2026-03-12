@@ -45,22 +45,68 @@
             }
         }
     </script>
-    <style>
-        body { background-color: #020617; color: white; }
-        .glass-nav { background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(12px); }
-        .btn-primary { background: #3b82f6; color: #020617; }
-        .page-hero { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); padding: 180px 0 80px; text-align: center; }
-        .page-hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; margin-bottom: 20px; }
-        footer { background: #020617; border-top: 1px solid rgba(255, 255, 255, 0.05); }
-        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: #3b82f6; color: #020617; border: none; border-radius: 50%; z-index: 4000; opacity: 0; transform: translateY(20px); pointer-events: none; }
-        .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
-        .gallery-item { overflow: hidden; border-radius: 1rem; cursor: pointer; }
-        .gallery-item img { transition: transform 0.5s ease; }
-        .gallery-item:hover img { transform: scale(1.1); }
-    </style>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../pages-shared.css">
 </head>
 
 <body class="antialiased">
+
+    <!-- SEARCH OVERLAY -->
+    <div class="search-overlay" id="searchOverlay">
+        <button class="search-close-btn" onclick="toggleSearch()">
+            <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" viewBox="0 0 24 24">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <div class="search-content-wrapper">
+            <input type="text" class="search-field" id="mainSearchInput" placeholder="Search for sermons, events...">
+            <div class="search-submit-icon">
+                <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOGIN DRAWER -->
+    <div class="login-overlay-bg" id="loginOverlayBg" onclick="toggleLogin()"></div>
+    <div class="login-drawer" id="loginDrawer">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="!mb-0">Login</h2>
+            <button onclick="toggleLogin()" class="text-gray-400 hover:text-white transition-colors">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="login-group"><label>Username</label><input type="text" class="login-input"
+                placeholder="Enter username"></div>
+        <div class="login-group"><label>Password</label><input type="password" class="login-input"
+                placeholder="Enter password"></div>
+        <button class="login-btn" onclick="toggleLogin()">Login</button>
+        <p class="text-xs text-gray-500 mt-6 text-center cursor-pointer hover:text-brand-accent transition-colors">
+            Forgot password?</p>
+    </div>
+
+    <!-- VIDEO MODAL -->
+    <div id="liveStreamModal" class="stream-modal">
+        <div class="stream-modal-backdrop" onclick="closeLiveStream()"></div>
+        <div class="stream-modal-content">
+            <button class="close-stream-btn" onclick="closeLiveStream()">&times; Close</button>
+            <div class="video-container">
+                <iframe id="liveVideo" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0"
+                    title="Live Stream Player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
 
     <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -119,9 +165,11 @@
     </nav>
 
     <section class="page-hero">
-        <p class="text-brand-accent font-semibold uppercase tracking-wider mb-4">Gallery</p>
-        <h1 class="page-hero-title">Captured Moments</h1>
-        <p class="text-gray-400 max-w-xl mx-auto">Browse through photos and videos from our services, events, and community gatherings.</p>
+        <div class="page-hero-content page-fade-in">
+            <span class="page-hero-label">Gallery</span>
+            <h1 class="page-hero-title">Captured <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-brand-accent">Moments</span></h1>
+            <p class="page-hero-subtitle">Browse through photos and videos from our services, events, and community gatherings.</p>
+        </div>
     </section>
 
     <section class="py-8 bg-[#020617] border-b border-gray-800">
@@ -248,8 +296,19 @@
         </div>
     </footer>
 
-    <script>window.addEventListener('scroll', () => document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 500));</script>
-    <button id="backToTop" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-</body>
+    <!-- Back to Top -->
+    <button id="backToTop" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <svg class="back-to-top-ring" viewBox="0 0 46 46">
+            <circle class="back-to-top-ring-bg" cx="23" cy="23" r="20" />
+            <circle class="back-to-top-ring-fill" cx="23" cy="23" r="20" id="scrollRing" />
+        </svg>
+        <svg class="back-to-top-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+        </svg>
+    </button>
 
+    <script src="../pages-shared.js"></script>
+</body>
 </html>
