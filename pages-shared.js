@@ -160,16 +160,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
 })();
 
-// GIVING AMOUNT SELECTOR
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.amount-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const input = document.getElementById('customAmount');
-            if (input && btn.dataset.amount) {
-                input.value = btn.dataset.amount;
-            }
-        });
-    });
-});
+// GIVING AMOUNT SELECTOR logic removed as it is handled specifically in give.html

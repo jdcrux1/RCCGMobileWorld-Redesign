@@ -46,7 +46,7 @@ def update_pages():
         original_content = content
         
         # Replace nav
-        content = re.sub(r'<nav[^>]*>.*?</nav>', pages_nav, content, flags=re.DOTALL)
+        content = re.sub(r'<nav class="fixed[^>]*>.*?</nav>', pages_nav, content, flags=re.DOTALL)
         
         # Replace footer
         content = re.sub(r'<footer[^>]*>.*?</footer>', pages_footer, content, flags=re.DOTALL)
