@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ============================================
+         DYNAMIC PAGE TITLE - Replace with event.title
+         ============================================ -->
     <title>Youth Summit 2026 — RCCG Events</title>
     <meta name="description" content="Join us for Youth Summit 2026 - Empowering the next generation for excellence and leadership.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -34,14 +35,8 @@
                         'slide-up': 'slideUp 0.8s ease-out forwards',
                     },
                     keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' },
-                        },
-                        slideUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        }
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                        slideUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } }
                     }
                 }
             }
@@ -49,6 +44,72 @@
     </script>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../pages-shared.css">
+    <style>
+        .event-hero {
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.3) 0%, rgba(15, 23, 42, 0.95) 100%), url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        .sticky-register {
+            transition: all 0.3s ease;
+        }
+        .sticky-register.hidden {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        .speaker-card {
+            transition: all 0.3s ease;
+        }
+        .speaker-card:hover {
+            transform: translateY(-4px);
+        }
+        .map-placeholder {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%);
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+        .map-placeholder:hover {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+        }
+        .capacity-bar {
+            height: 4px;
+            border-radius: 2px;
+            background: #374151;
+            overflow: hidden;
+        }
+        .capacity-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.5s ease;
+        }
+        .social-share-btn {
+            transition: all 0.2s ease;
+        }
+        .social-share-btn:hover {
+            transform: translateY(-2px);
+        }
+        @media (max-width: 768px) {
+            .speakers-scroll {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                gap: 1rem;
+                padding-bottom: 1rem;
+            }
+            .speakers-scroll::-webkit-scrollbar {
+                display: none;
+            }
+            .speaker-card {
+                flex: 0 0 280px;
+                scroll-snap-align: start;
+            }
+        }
+    </style>
 </head>
 
 <body class="antialiased">
@@ -56,8 +117,7 @@
     <!-- SEARCH OVERLAY -->
     <div class="search-overlay" id="searchOverlay">
         <button class="search-close-btn" onclick="toggleSearch()">
-            <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" viewBox="0 0 24 24">
+            <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
@@ -65,8 +125,7 @@
         <div class="search-content-wrapper">
             <input type="text" class="search-field" id="mainSearchInput" placeholder="Search for sermons, events...">
             <div class="search-submit-icon">
-                <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" viewBox="0 0 24 24">
+                <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                     <circle cx="11" cy="11" r="8"></circle>
                     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
@@ -80,20 +139,16 @@
         <div class="flex justify-between items-center mb-8">
             <h2 class="!mb-0">Login</h2>
             <button onclick="toggleLogin()" class="text-gray-400 hover:text-white transition-colors">
-                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" viewBox="0 0 24 24">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </button>
         </div>
-        <div class="login-group"><label>Username</label><input type="text" class="login-input"
-                placeholder="Enter username"></div>
-        <div class="login-group"><label>Password</label><input type="password" class="login-input"
-                placeholder="Enter password"></div>
+        <div class="login-group"><label>Username</label><input type="text" class="login-input" placeholder="Enter username"></div>
+        <div class="login-group"><label>Password</label><input type="password" class="login-input" placeholder="Enter password"></div>
         <button class="login-btn" onclick="toggleLogin()">Login</button>
-        <p class="text-xs text-gray-500 mt-6 text-center cursor-pointer hover:text-brand-accent transition-colors">
-            Forgot password?</p>
+        <p class="text-xs text-gray-500 mt-6 text-center cursor-pointer hover:text-brand-accent transition-colors">Forgot password?</p>
     </div>
 
     <!-- VIDEO MODAL -->
@@ -102,10 +157,7 @@
         <div class="stream-modal-content">
             <button class="close-stream-btn" onclick="closeLiveStream()">&times; Close</button>
             <div class="video-container">
-                <iframe id="liveVideo" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0"
-                    title="Live Stream Player" frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen></iframe>
+                <iframe id="liveVideo" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0" title="Live Stream Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
     </div>
@@ -114,26 +166,17 @@
     <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="../index.html" class="flex items-center">
                         <img src="../rccg-for-web.png" alt="RCCG Logo" class="h-12 w-auto">
                     </a>
                 </div>
-
-                <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#" onclick="toggleLogin(event)"
-                        class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Login</a>
-                    <a href="about.html"
-                        class="text-sm font-medium text-gray-300 hover:text-white transition-colors">About</a>
-                    <a href="sermons.html"
-                        class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Sermons</a>
-                    <a href="events.html"
-                        class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Events</a>
-                    <a href="contact.html"
-                        class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Contact</a>
-
+                    <a href="#" onclick="toggleLogin(event)" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Login</a>
+                    <a href="about.html" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="sermons.html" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Sermons</a>
+                    <a href="events.html" class="text-sm font-medium text-white">Events</a>
+                    <a href="contact.html" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Contact</a>
                     <div class="pl-4 border-l border-gray-700 flex gap-4 items-center">
                         <button onclick="toggleSearch()" class="text-gray-300 hover:text-white transition-colors p-2">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -141,14 +184,10 @@
                                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                             </svg>
                         </button>
-                        <a href="#" onclick="openLiveStream(event)"
-                            class="text-sm font-medium text-white btn-outline px-5 py-2 rounded-full">Watch
-                            Live</a>
+                        <a href="#" onclick="openLiveStream(event)" class="text-sm font-medium text-white btn-outline px-5 py-2 rounded-full">Watch Live</a>
                         <a href="give.html" class="text-sm font-medium text-white btn-primary px-5 py-2 rounded-full">Give</a>
                     </div>
                 </div>
-
-                <!-- Mobile Menu Button & Search -->
                 <div class="flex md:hidden items-center gap-2">
                     <button onclick="toggleSearch()" class="text-gray-300 hover:text-white p-2">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -156,10 +195,9 @@
                             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                         </svg>
                     </button>
-                    <button class="text-gray-300 hover:text-white p-2">
+                    <button onclick="toggleMobileMenu()" aria-label="Open menu" class="text-gray-300 hover:text-white p-2">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
                 </div>
@@ -167,161 +205,599 @@
         </div>
     </nav>
 
-    <!-- Event Hero -->
-    <section class="pt-32 pb-16 px-4" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
-        <div class="max-w-4xl mx-auto text-center">
-            <span class="inline-block px-4 py-1 rounded-full bg-brand-accent/20 text-brand-accent text-sm font-semibold mb-4">Youth Event</span>
-            <h1 class="font-serif text-4xl md:text-5xl font-bold text-white mb-4">Youth Summit 2026</h1>
-            <p class="text-xl text-gray-400">Empowering the next generation for excellence and leadership</p>
+    <!-- FULL-SCREEN MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <a href="../index.html" class="flex items-center"><img src="../rccg-for-web.png" alt="RCCG Logo" class="h-10 w-auto"></a>
+            <button class="mobile-menu-close" onclick="toggleMobileMenu()" aria-label="Close menu"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        </div>
+        <div class="mobile-menu-links">
+            <a href="../index.html" class="mobile-menu-link"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg> Home</a>
+            <a href="about.html" class="mobile-menu-link"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> About</a>
+            <a href="sermons.html" class="mobile-menu-link"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg> Sermons</a>
+            <a href="events.html" class="mobile-menu-link"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg> Events</a>
+            <a href="contact.html" class="mobile-menu-link"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg> Contact</a>
+            <a href="#" onclick="toggleLogin(event); toggleMobileMenu();" class="mobile-menu-link"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg> Login</a>
+        </div>
+        <div class="mobile-menu-ctas">
+            <a href="#" onclick="openLiveStream(event); toggleMobileMenu();" class="btn-outline text-white"><svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg> Watch Live</a>
+            <a href="give.html" class="btn-primary text-white"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> Give</a>
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="pt-32 pb-4 bg-brand-base">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex items-center gap-2 text-sm">
+                <a href="../index.html" class="text-gray-400 hover:text-white transition-colors">Home</a>
+                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+                <a href="events.html" class="text-gray-400 hover:text-white transition-colors">Events</a>
+                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+                <!-- ============================================
+                     DYNAMIC EVENT TITLE - Replace with event.title
+                     ============================================ -->
+                <span class="text-white font-medium">Youth Summit 2026</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Event Hero Section -->
+    <!-- ============================================
+         DYNAMIC IMAGE - Replace with event.image URL
+         ============================================ -->
+    <section class="event-hero min-h-[50vh] flex items-end">
+        <div class="w-full">
+            <!-- Category Tag -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+                <!-- ============================================
+                     DYNAMIC CATEGORY - Replace with event.category
+                     ============================================ -->
+                <span class="inline-block px-4 py-1.5 rounded-full bg-brand-accent/20 text-brand-accent text-sm font-semibold mb-4">Youth Event</span>
+            </div>
+            
+            <!-- Hero Content -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+                <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+                    <div class="flex-1">
+                        <!-- ============================================
+                             DYNAMIC TITLE - Replace with event.title
+                             ============================================ -->
+                        <h1 class="font-serif text-4xl md:text-5xl font-bold text-white mb-4">Youth Summit 2026</h1>
+                        <p class="text-lg text-gray-300 max-w-2xl">Empowering the next generation for excellence and leadership</p>
+                    </div>
+                    
+                    <!-- ============================================
+                         DYNAMIC REGISTRATION STATUS
+                         Replace with event.registrationRequired boolean
+                         ============================================ -->
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <a href="#register" class="btn-primary px-8 py-4 rounded-xl text-lg font-semibold inline-flex items-center justify-center gap-2 whitespace-nowrap">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/>
+                            </svg>
+                            Register Now
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Event Details -->
-    <section class="py-16 bg-[#020617]">
-        <div class="max-w-4xl mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                <div class="bg-gray-800/50 p-6 rounded-xl">
-                    <h3 class="text-gray-400 text-sm mb-2">Date</h3>
-                    <p class="text-white font-semibold text-lg">February 14, 2026</p>
+    <!-- Sticky Register Button (Mobile) -->
+    <div id="stickyRegister" class="sticky-register fixed bottom-0 left-0 right-0 z-40 bg-brand-base border-t border-gray-700 p-4 md:hidden" style="display: none;">
+        <a href="#register" class="btn-primary w-full py-4 rounded-xl text-lg font-semibold inline-flex items-center justify-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/>
+            </svg>
+            Register Now
+        </a>
+    </div>
+
+    <!-- Event Details Grid -->
+    <section class="section-padding bg-[#020617]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                <!-- Date & Time -->
+                <div class="premium-card rounded-xl p-5">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-brand-accent/10 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-gray-400 text-sm">Date & Time</p>
+                            <!-- ============================================
+                                 DYNAMIC DATE - Replace with formatted event.startDate
+                                 ============================================ -->
+                            <p class="text-white font-semibold">February 14, 2026</p>
+                            <!-- ============================================
+                                 DYNAMIC TIME - Replace with event.startTime - event.endTime
+                                 ============================================ -->
+                            <p class="text-gray-300 text-sm">10:00 AM - 4:00 PM</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-gray-800/50 p-6 rounded-xl">
-                    <h3 class="text-gray-400 text-sm mb-2">Time</h3>
-                    <p class="text-white font-semibold text-lg">10:00 AM - 4:00 PM</p>
+
+                <!-- Location -->
+                <div class="premium-card rounded-xl p-5">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-brand-goldlight/10 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-brand-goldlight" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-gray-400 text-sm">Location</p>
+                            <!-- ============================================
+                                 DYNAMIC VENUE - Replace with event.location.name
+                                 ============================================ -->
+                            <p class="text-white font-semibold">Youth Centre</p>
+                            <!-- ============================================
+                                 DYNAMIC ADDRESS - Replace with event.location.address
+                                 ============================================ -->
+                            <p class="text-gray-300 text-sm">Redemption Camp, Lagos</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-gray-800/50 p-6 rounded-xl">
-                    <h3 class="text-gray-400 text-sm mb-2">Venue</h3>
-                    <p class="text-white font-semibold text-lg">Youth Centre, Redemption Camp</p>
+
+                <!-- Price -->
+                <div class="premium-card rounded-xl p-5">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-gray-400 text-sm">Entry</p>
+                            <!-- ============================================
+                                 DYNAMIC PRICE - Replace with event.price
+                                 ============================================ -->
+                            <p class="text-white font-semibold text-lg">Free Admission</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-gray-800/50 p-6 rounded-xl">
-                    <h3 class="text-gray-400 text-sm mb-2">Entry</h3>
-                    <p class="text-white font-semibold text-lg">Free Admission</p>
+
+                <!-- Capacity -->
+                <div class="premium-card rounded-xl p-5">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-gray-400 text-sm">Spots Available</p>
+                            <!-- ============================================
+                                 DYNAMIC CAPACITY - Replace with event.capacity - event.registeredCount
+                                 ============================================ -->
+                            <p class="text-white font-semibold">150 spots left</p>
+                            <div class="capacity-bar mt-2">
+                                <!-- ============================================
+                                     DYNAMIC CAPACITY PERCENTAGE
+                                     Replace with (event.registeredCount / event.capacity) * 100
+                                     ============================================ -->
+                                <div class="capacity-fill bg-brand-accent" style="width: 40%;"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="mb-12">
-                <h2 class="font-serif text-2xl font-bold text-white mb-4">About This Event</h2>
-                <p class="text-gray-400 leading-relaxed mb-6">Youth Summit 2026 is a transformative event designed to empower young people aged 13-35 for excellence and leadership. Join us for a day of inspiring worship, powerful teaching, and networking with like-minded young people from across the nation.</p>
-                <p class="text-gray-400 leading-relaxed">What to expect:</p>
-                <ul class="text-gray-400 mt-4 space-y-2">
-                    <li>• Inspiring worship sessions</li>
-                    <li>• Leadership training workshops</li>
-                    <li>• Networking opportunities</li>
-                    <li>• Ministry exhibition</li>
-                    <li>• And much more!</li>
+            <!-- Add to Calendar -->
+            <div class="flex flex-wrap items-center gap-4">
+                <span class="text-gray-400 text-sm">Add to Calendar:</span>
+                <button onclick="addToGoogleCalendar()" class="flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-sm text-white transition-colors">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zM9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm-8 4H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/>
+                    </svg>
+                    Google
+                </button>
+                <button onclick="downloadICS()" class="flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-sm text-white transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    iCal / Outlook
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About / Description -->
+    <section class="section-padding bg-[#04091a]">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-serif text-2xl md:text-3xl font-bold text-white mb-6">About This Event</h2>
+            
+            <!-- ============================================
+                 DYNAMIC DESCRIPTION - Replace with event.description (HTML)
+                 ============================================ -->
+            <div class="prose-content text-gray-300 leading-relaxed space-y-4">
+                <p>Youth Summit 2026 is a transformative event designed to empower young people aged 13-35 for excellence and leadership. Join us for a day of inspiring worship, powerful teaching, and networking with like-minded young people from across the nation.</p>
+                
+                <p>What to expect:</p>
+                
+                <ul class="space-y-2 list-disc list-inside text-gray-300">
+                    <li>Inspiring worship sessions led by talented youth worship teams</li>
+                    <li>Leadership training workshops with industry experts</li>
+                    <li>Networking opportunities with young leaders from across the country</li>
+                    <li>Ministry exhibition showcasing youth-led initiatives</li>
+                    <li>Special guest appearances and surprise performances</li>
                 </ul>
+                
+                <p>Don't miss this incredible opportunity to be empowered, inspired, and connected with the next generation of leaders!</p>
             </div>
 
-            <button class="btn-primary w-full py-4 rounded-xl text-lg font-semibold">
-                Register Now
-            </button>
+            <!-- Schedule / Agenda -->
+            <div class="mt-10">
+                <h3 class="font-serif text-xl font-bold text-white mb-4">Event Schedule</h3>
+                <div class="space-y-4">
+                    <!-- ============================================
+                         DYNAMIC SCHEDULE - Loop through event.schedule
+                         ============================================ -->
+                    <div class="flex gap-4 p-4 bg-brand-base rounded-xl">
+                        <div class="text-brand-accent font-semibold min-w-[80px]">10:00 AM</div>
+                        <div class="text-white">Registration & Welcome</div>
+                    </div>
+                    <div class="flex gap-4 p-4 bg-brand-base rounded-xl">
+                        <div class="text-brand-accent font-semibold min-w-[80px]">11:00 AM</div>
+                        <div class="text-white">Opening Worship</div>
+                    </div>
+                    <div class="flex gap-4 p-4 bg-brand-base rounded-xl">
+                        <div class="text-brand-accent font-semibold min-w-[80px]">12:00 PM</div>
+                        <div class="text-white">Keynote Address: "Leading with Purpose"</div>
+                    </div>
+                    <div class="flex gap-4 p-4 bg-brand-base rounded-xl">
+                        <div class="text-brand-accent font-semibold min-w-[80px]">1:00 PM</div>
+                        <div class="text-white">Lunch Break & Networking</div>
+                    </div>
+                    <div class="flex gap-4 p-4 bg-brand-base rounded-xl">
+                        <div class="text-brand-accent font-semibold min-w-[80px]">2:00 PM</div>
+                        <div class="text-white">Workshop Sessions</div>
+                    </div>
+                    <div class="flex gap-4 p-4 bg-brand-base rounded-xl">
+                        <div class="text-brand-accent font-semibold min-w-[80px]">4:00 PM</div>
+                        <div class="text-white">Closing Celebration</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Other Events -->
-    <section class="py-16 bg-[#0f172a]">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="font-serif text-2xl font-bold text-white mb-8">Other Events</h2>
+    <!-- Speakers / Hosts -->
+    <!-- ============================================
+         CONDITIONAL - Only show if event.speakers exists
+         ============================================ -->
+    <section class="section-padding bg-[#020617]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <span class="text-brand-accent text-sm font-semibold uppercase tracking-widest mb-2 block">Meet Our Speakers</span>
+                <h2 class="font-serif text-2xl md:text-3xl font-bold text-white">Featured Speakers</h2>
+            </div>
+
+            <div class="speakers-scroll">
+                <!-- Speaker 1 -->
+                <!-- ============================================
+                     DYNAMIC SPEAKER - Loop through event.speakers
+                     ============================================ -->
+                <div class="speaker-card premium-card rounded-2xl p-6 text-center">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80" alt="Speaker Name" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+                    <h4 class="text-white font-semibold">Pastor John Smith</h4>
+                    <p class="text-brand-accent text-sm mb-2">Lead Pastor</p>
+                    <p class="text-gray-400 text-sm">Passionate about mentoring the next generation of leaders.</p>
+                </div>
+
+                <!-- Speaker 2 -->
+                <div class="speaker-card premium-card rounded-2xl p-6 text-center">
+                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80" alt="Speaker Name" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+                    <h4 class="text-white font-semibold">Sarah Johnson</h4>
+                    <p class="text-brand-accent text-sm mb-2">Youth Director</p>
+                    <p class="text-gray-400 text-sm">Experienced youth mentor with a heart for transformation.</p>
+                </div>
+
+                <!-- Speaker 3 -->
+                <div class="speaker-card premium-card rounded-2xl p-6 text-center">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Speaker Name" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+                    <h4 class="text-white font-semibold">Michael Chen</h4>
+                    <p class="text-brand-accent text-sm mb-2">Leadership Coach</p>
+                    <p class="text-gray-400 text-sm">Executive coach helping young leaders reach their potential.</p>
+                </div>
+
+                <!-- Speaker 4 -->
+                <div class="speaker-card premium-card rounded-2xl p-6 text-center">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80" alt="Speaker Name" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+                    <h4 class="text-white font-semibold">Grace Okoro</h4>
+                    <p class="text-brand-accent text-sm mb-2">Worship Leader</p>
+                    <p class="text-gray-400 text-sm">Anointed worship leader creating transformative atmospheres.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location / Venue -->
+    <section class="section-padding bg-[#04091a]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <!-- Map -->
+                <div>
+                    <h2 class="font-serif text-2xl font-bold text-white mb-4">Venue Location</h2>
+                    <!-- Lazy-loaded Map -->
+                    <div class="map-placeholder rounded-2xl overflow-hidden mb-6" id="eventMapContainer">
+                        <div class="text-center py-16" id="mapPlaceholderContent">
+                            <svg class="w-12 h-12 mx-auto mb-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            <p class="text-gray-300 font-medium mb-1">Click to load map</p>
+                            <p class="text-gray-500 text-xs">Loading helps improve page performance</p>
+                        </div>
+                        <iframe id="mapIframe" style="display: none; width: 100%; height: 400px; border: none;" title="Event location map" loading="lazy" allowfullscreen></iframe>
+                    </div>
+
+                    <!-- Address & Directions -->
+                    <div class="p-5 bg-brand-base rounded-xl">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                            <div>
+                                <p class="text-white font-semibold">Youth Centre, Redemption Camp</p>
+                                <p class="text-gray-400 text-sm">Lagos, Nigeria</p>
+                            </div>
+                            <!-- ============================================
+                                 DYNAMIC DIRECTIONS LINK
+                                 Replace with Google Maps URL
+                                 ============================================ -->
+                            <a href="https://maps.google.com/?q=Redemption+Camp+Lagos" target="_blank" rel="noopener noreferrer" class="btn-primary px-5 py-2.5 rounded-lg text-sm font-medium inline-flex items-center gap-2 whitespace-nowrap">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                </svg>
+                                Get Directions
+                            </a>
+                        </div>
+                        <!-- Parking Info -->
+                        <!-- ============================================
+                             DYNAMIC PARKING INFO
+                             Replace with event.location.parkingInstructions
+                             ============================================ -->
+                        <div class="mt-4 pt-4 border-t border-gray-700">
+                            <p class="text-gray-400 text-sm"><span class="text-white font-medium">Parking:</span> Free parking available on-site. Enter through Gate A.</p>
+                            <p class="text-gray-400 text-sm mt-2"><span class="text-white font-medium">Accessibility:</span> Wheelchair accessible entrance at the main building.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Registration Form -->
+                <div id="register">
+                    <h2 class="font-serif text-2xl font-bold text-white mb-4">Register for This Event</h2>
+                    
+                    <!-- ============================================
+                         CONDITIONAL - Show based on event.registrationRequired
+                         ============================================ -->
+                    <div class="premium-card rounded-2xl p-6">
+                        <!-- Success Message -->
+                        <div class="success-message text-center py-8" id="registrationSuccess" style="display: none;">
+                            <svg class="w-16 h-16 mx-auto mb-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <h3 class="text-white font-semibold text-xl mb-2">Registration Complete!</h3>
+                            <p class="text-gray-400 mb-4">Check your email for confirmation details.</p>
+                            <p class="text-gray-500 text-sm">We look forward to seeing you at the event!</p>
+                        </div>
+
+                        <!-- Registration Form -->
+                        <form id="eventRegistrationForm">
+                            <div class="mb-4">
+                                <label for="regName" class="block text-sm font-medium text-gray-300 mb-2">Full Name <span class="text-red-400">*</span></label>
+                                <input type="text" id="regName" class="w-full px-4 py-3 bg-brand-light border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-brand-accent transition-colors" placeholder="John Doe" required>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="regEmail" class="block text-sm font-medium text-gray-300 mb-2">Email Address <span class="text-red-400">*</span></label>
+                                <input type="email" id="regEmail" class="w-full px-4 py-3 bg-brand-light border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-brand-accent transition-colors" placeholder="john@example.com" required>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="regPhone" class="block text-sm font-medium text-gray-300 mb-2">Phone <span class="text-gray-500">(optional)</span></label>
+                                <input type="tel" id="regPhone" class="w-full px-4 py-3 bg-brand-light border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-brand-accent transition-colors" placeholder="+234 800 000 0000">
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="regGuests" class="block text-sm font-medium text-gray-300 mb-2">Number of Guests</label>
+                                <select id="regGuests" class="w-full px-4 py-3 bg-brand-light border border-gray-700 rounded-xl text-white focus:outline-none focus:border-brand-accent transition-colors">
+                                    <option value="1">1 person (just me)</option>
+                                    <option value="2">2 people</option>
+                                    <option value="3">3 people</option>
+                                    <option value="4">4 people</option>
+                                    <option value="5">5+ people</option>
+                                </select>
+                            </div>
+
+                            <!-- ============================================
+                                 CONDITIONAL PRICE DISPLAY
+                                 Replace with event.price logic
+                                 ============================================ -->
+                            <div class="mb-6 p-4 bg-brand-base rounded-xl">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-400">Registration</span>
+                                    <span class="text-white font-semibold">Free</span>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary w-full py-4 rounded-xl text-lg font-semibold" id="registerBtn">
+                                Complete Registration
+                            </button>
+                            
+                            <p class="text-gray-500 text-xs text-center mt-4">By registering, you agree to receive event updates via email.</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Share This Event -->
+    <section class="section-padding bg-[#020617]">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="font-serif text-2xl font-bold text-white mb-6">Share This Event</h2>
+            <p class="text-gray-400 mb-6">Invite others to join you at this event!</p>
+            
+            <div class="flex flex-wrap justify-center gap-4">
+                <button onclick="shareOnFacebook()" class="social-share-btn flex items-center gap-2 px-5 py-3 bg-[#1877F2] hover:bg-[#0d5bb5] rounded-xl text-white font-medium">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+                    </svg>
+                    Facebook
+                </button>
+                <button onclick="shareOnTwitter()" class="social-share-btn flex items-center gap-2 px-5 py-3 bg-[#1DA1F2] hover:bg-[#0c85d0] rounded-xl text-white font-medium">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/>
+                    </svg>
+                    X (Twitter)
+                </button>
+                <button onclick="shareOnWhatsApp()" class="social-share-btn flex items-center gap-2 px-5 py-3 bg-[#25D366] hover:bg-[#1da851] rounded-xl text-white font-medium">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.219 3.224.149.297.149 1.623-.025 2.432-.15.745-.523 1.505-.996 2.095-.248.312-.415.52-.598.681-.149.127-.297.173-.534.099-.297-.074-1.234-.945-2.351-1.914-.858-.746-1.436-1.667-1.603-1.95-.149-.249-.025-.372.1-.495.124-.124.298-.347.447-.52.149-.174.248-.298.348-.497.099-.198.05-.298.025-.52-.075-.149-.669-1.613-.915-2.206z"/>
+                    </svg>
+                    WhatsApp
+                </button>
+                <button onclick="copyEventLink()" class="social-share-btn flex items-center gap-2 px-5 py-3 bg-gray-700 hover:bg-gray-600 rounded-xl text-white font-medium" id="copyLinkBtn">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012 2h2a2 2 0 012-2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+                    </svg>
+                    <span id="copyLinkText">Copy Link</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Events -->
+    <section class="section-padding bg-[#04091a]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <span class="text-brand-accent text-sm font-semibold uppercase tracking-widest mb-2 block">What's Next</span>
+                <h2 class="font-serif text-2xl md:text-3xl font-bold text-white">You Might Also Like</h2>
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <a href="#" class="bg-gray-800/50 p-6 rounded-xl hover:bg-gray-800 transition">
-                    <p class="text-brand-accent text-sm font-semibold mb-2">February 8, 2026</p>
-                    <h3 class="text-white font-semibold">Thanksgiving Sunday</h3>
+                <!-- Related Event 1 -->
+                <!-- ============================================
+                     DYNAMIC RELATED EVENTS - Loop through event.relatedEvents
+                     ============================================ -->
+                <a href="event-detail.html" class="premium-card rounded-2xl overflow-hidden group">
+                    <div class="relative h-40 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Event" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute top-3 left-3 px-3 py-1 bg-brand-accent/90 rounded-full text-white text-xs font-semibold">Worship</div>
+                    </div>
+                    <div class="p-5">
+                        <p class="text-brand-accent text-sm font-medium mb-1">March 15, 2026</p>
+                        <h3 class="text-white font-semibold text-lg mb-2 group-hover:text-brand-accent transition-colors">Annual Worship Conference</h3>
+                        <p class="text-gray-400 text-sm">Main Auditorium • 9:00 AM</p>
+                    </div>
                 </a>
-                <a href="#" class="bg-gray-800/50 p-6 rounded-xl hover:bg-gray-800 transition">
-                    <p class="text-brand-accent text-sm font-semibold mb-2">March 15, 2026</p>
-                    <h3 class="text-white font-semibold">Annual Worship Conference</h3>
+
+                <!-- Related Event 2 -->
+                <a href="event-detail.html" class="premium-card rounded-2xl overflow-hidden group">
+                    <div class="relative h-40 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&q=80" alt="Event" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute top-3 left-3 px-3 py-1 bg-brand-gold/90 rounded-full text-white text-xs font-semibold">Special</div>
+                    </div>
+                    <div class="p-5">
+                        <p class="text-brand-accent text-sm font-medium mb-1">April 5, 2026</p>
+                        <h3 class="text-white font-semibold text-lg mb-2 group-hover:text-brand-accent transition-colors">Easter Celebration</h3>
+                        <p class="text-gray-400 text-sm">Main Campus • 9:00 AM & 11:00 AM</p>
+                    </div>
                 </a>
-                <a href="#" class="bg-gray-800/50 p-6 rounded-xl hover:bg-gray-800 transition">
-                    <p class="text-brand-accent text-sm font-semibold mb-2">April 5, 2026</p>
-                    <h3 class="text-white font-semibold">Easter Celebration</h3>
+
+                <!-- Related Event 3 -->
+                <a href="event-detail.html" class="premium-card rounded-2xl overflow-hidden group">
+                    <div class="relative h-40 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=600&q=80" alt="Event" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute top-3 left-3 px-3 py-1 bg-emerald-500/90 rounded-full text-white text-xs font-semibold">Outreach</div>
+                    </div>
+                    <div class="p-5">
+                        <p class="text-brand-accent text-sm font-medium mb-1">April 12, 2026</p>
+                        <h3 class="text-white font-semibold text-lg mb-2 group-hover:text-brand-accent transition-colors">Community Cleanup Day</h3>
+                        <p class="text-gray-400 text-sm">City Center • 8:00 AM</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="text-center mt-10">
+                <a href="events.html" class="btn-outline px-8 py-3 rounded-full text-white inline-flex items-center gap-2">
+                    View All Events
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
                 </a>
             </div>
         </div>
     </section>
 
-    <footer class="bg-[#020617] pt-20 pb-10 border-t border-gray-800">
+    <!-- CTA Section -->
+    <section class="section-padding bg-gradient-to-br from-[#0f172a] to-[#1e293b] relative overflow-hidden">
+        <div class="absolute inset-0 opacity-30">
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-accent/20 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-gold/20 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold text-white mb-4">Have Questions?</h2>
+            <p class="text-gray-400 mb-10 max-w-2xl mx-auto">If you have any questions about this event or need assistance with registration, we'd love to help.</p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="contact.html" class="btn-primary px-8 py-4 rounded-full text-white font-semibold inline-flex items-center justify-center gap-2">
+                    Contact Us
+                </a>
+                <a href="about.html" class="btn-outline px-8 py-4 rounded-full text-white font-medium inline-flex items-center justify-center gap-2">
+                    Learn About Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#020617] pt-16 pb-10 border-t border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
                 <div class="col-span-1 md:col-span-1">
                     <a href="../index.html" class="mb-4 block">
                         <img src="../rccg-for-web.png" alt="RCCG Logo" class="h-12 w-auto filter drop-shadow-md">
                     </a>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                        A place where faith grows, hearts connect, and lives are transformed through the power of God's
-                        love.
-                    </p>
-                    <a href="mailto:contact@rccg.org"
-                        class="text-gray-300 hover:text-white transition-colors">contact@rccg.org</a>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">A place where faith grows, hearts connect, and lives are transformed.</p>
+                    <a href="mailto:contact@rccg.org" class="text-gray-300 hover:text-white transition-colors">contact@rccg.org</a>
                 </div>
-
                 <div>
                     <h4 class="text-white font-semibold mb-6">Quick Links</h4>
                     <ul class="space-y-4">
-                        <li><a href="about.html" class="text-gray-400 hover:text-white transition-colors text-sm">About Us</a>
-                        </li>
-                        <li><a href="sermons.html" class="text-gray-400 hover:text-white transition-colors text-sm">Sermons</a>
-                        </li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition-colors text-sm">About Us</a></li>
+                        <li><a href="sermons.html" class="text-gray-400 hover:text-white transition-colors text-sm">Sermons</a></li>
                         <li><a href="events.html" class="text-gray-400 hover:text-white transition-colors text-sm">Events</a></li>
-                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition-colors text-sm">Contact</a>
-                        </li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition-colors text-sm">Contact</a></li>
                     </ul>
                 </div>
-
                 <div>
                     <h4 class="text-white font-semibold mb-6">Resources</h4>
                     <ul class="space-y-4">
                         <li><a href="blog.html" class="text-gray-400 hover:text-white transition-colors text-sm">Blog</a></li>
-                        <li><a href="devotionals.html" class="text-gray-400 hover:text-white transition-colors text-sm">Devotionals</a>
-                        </li>
-                        <li><a href="testimonies.html" class="text-gray-400 hover:text-white transition-colors text-sm">Testimonies</a>
-                        </li>
-                        <li><a href="gallery.html" class="text-gray-400 hover:text-white transition-colors text-sm">Gallery</a>
-                        </li>
+                        <li><a href="devotionals.html" class="text-gray-400 hover:text-white transition-colors text-sm">Devotionals</a></li>
+                        <li><a href="testimonies.html" class="text-gray-400 hover:text-white transition-colors text-sm">Testimonies</a></li>
+                        <li><a href="gallery.html" class="text-gray-400 hover:text-white transition-colors text-sm">Gallery</a></li>
                     </ul>
                 </div>
-
                 <div>
                     <h4 class="text-white font-semibold mb-6">Connect</h4>
                     <div class="flex space-x-4">
-                        <a href="#"
-                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-brand-accent transition-all">
-                            <span class="sr-only">Facebook</span>
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
-                            </svg>
-                        </a>
-                        <a href="#"
-                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-brand-accent transition-all">
-                            <span class="sr-only">Instagram</span>
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path fill-rule="evenodd"
-                                    d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                        </a>
-                        <a href="#"
-                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-brand-accent transition-all">
-                            <span class="sr-only">X (Twitter)</span>
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
-                            </svg>
-                        </a>
-                        <a href="#"
-                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-brand-accent transition-all">
-                            <span class="sr-only">YouTube</span>
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-                            </svg>
-                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-brand-accent transition-all"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-brand-accent transition-all"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/></svg></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-brand-accent transition-all"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
                     </div>
                 </div>
             </div>
-
-            <div
-                class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
-                <p>&copy; 2026 RCCG Platform. All rights reserved.</p>
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p>&copy; 2026 RCCG Mobile World. All rights reserved.</p>
                 <div class="mt-4 md:mt-0 space-x-4">
                     <a href="privacy-policy.html" class="hover:text-white transition-colors">Privacy Policy</a>
                     <a href="terms-of-service.html" class="hover:text-white transition-colors">Terms of Service</a>
@@ -331,19 +807,225 @@
     </footer>
 
     <!-- Back to Top -->
-    <button id="backToTop" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <button id="backToTop" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
         <svg class="back-to-top-ring" viewBox="0 0 46 46">
-            <circle class="back-to-top-ring-bg" cx="23" cy="23" r="20" />
-            <circle class="back-to-top-ring-fill" cx="23" cy="23" r="20" id="scrollRing" />
+            <circle class="back-to-top-ring-bg" cx="23" cy="23" r="20"/>
+            <circle class="back-to-top-ring-fill" cx="23" cy="23" r="20" id="scrollRing"/>
         </svg>
-        <svg class="back-to-top-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="back-to-top-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <line x1="12" y1="19" x2="12" y2="5"></line>
             <polyline points="5 12 12 5 19 12"></polyline>
         </svg>
     </button>
 
     <script src="../pages-shared.js"></script>
+    <script>
+        // ============================================
+        // SAMPLE EVENT DATA STRUCTURE
+        // In production, replace with dynamic data from CMS/API
+        // ============================================
+        /*
+        const eventData = {
+            id: "youth-summit-2026",
+            title: "Youth Summit 2026",
+            slug: "youth-summit-2026",
+            category: "Youth Event",
+            image: "https://example.com/image.jpg",
+            description: "Empowering the next generation...",
+            startDate: "2026-02-14",
+            endDate: "2026-02-14",
+            startTime: "10:00 AM",
+            endTime: "4:00 PM",
+            timezone: "Africa/Lagos",
+            location: {
+                name: "Youth Centre",
+                address: "Redemption Camp, Lagos",
+                lat: 6.5,
+                lng: 3.3,
+                parkingInstructions: "Free parking available on-site. Enter through Gate A."
+            },
+            price: 0, // 0 = Free
+            currency: "NGN",
+            registrationRequired: true,
+            capacity: 250,
+            registeredCount: 100,
+            schedule: [
+                { time: "10:00 AM", activity: "Registration & Welcome" },
+                { time: "11:00 AM", activity: "Opening Worship" }
+            ],
+            speakers: [
+                { name: "Pastor John Smith", role: "Lead Pastor", bio: "...", photo: "..." }
+            ],
+            relatedEvents: [
+                { id: "worship-conference", title: "Annual Worship Conference", date: "March 15, 2026" }
+            ]
+        };
+        */
+
+        // Sticky Register Button on Mobile
+        (function() {
+            const stickyBtn = document.getElementById('stickyRegister');
+            const heroSection = document.querySelector('.event-hero');
+            
+            if (stickyBtn && heroSection) {
+                window.addEventListener('scroll', function() {
+                    const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+                    if (window.scrollY > heroBottom) {
+                        stickyBtn.style.display = 'block';
+                    } else {
+                        stickyBtn.style.display = 'none';
+                    }
+                });
+            }
+        })();
+
+        // Lazy Load Map
+        (function() {
+            const mapContainer = document.getElementById('eventMapContainer');
+            const mapPlaceholder = document.getElementById('mapPlaceholderContent');
+            const mapIframe = document.getElementById('mapIframe');
+            let mapLoaded = false;
+
+            // Google Maps embed URL - Replace with dynamic event location
+            const mapUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.5!2d3.3!3d6.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMzAnMDAuMCJOIDPCsDE4JzAwLjAiRQ!5e0!3m2!1sen!2sng!4v1234567890';
+
+            function loadMap() {
+                if (mapLoaded) return;
+                mapLoaded = true;
+                
+                mapIframe.src = mapUrl;
+                mapIframe.style.display = 'block';
+                mapPlaceholder.style.display = 'none';
+            }
+
+            mapContainer.addEventListener('click', loadMap);
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        loadMap();
+                        observer.disconnect();
+                    }
+                });
+            }, { rootMargin: '100px' });
+
+            observer.observe(mapContainer);
+        })();
+
+        // Registration Form Submission
+        (function() {
+            const form = document.getElementById('eventRegistrationForm');
+            const successMessage = document.getElementById('registrationSuccess');
+            const submitBtn = document.getElementById('registerBtn');
+            
+            if (!form) return;
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Show loading state
+                submitBtn.classList.add('loading');
+                submitBtn.disabled = true;
+                
+                // Collect form data
+                const formData = {
+                    eventId: 'youth-summit-2026', // Replace with dynamic event.id
+                    name: document.getElementById('regName').value,
+                    email: document.getElementById('regEmail').value,
+                    phone: document.getElementById('regPhone').value,
+                    guests: document.getElementById('regGuests').value
+                };
+                
+                // ============================================
+                // BACKEND INTEGRATION POINT:
+                // Send formData to your server/API
+                // ============================================
+                // const response = await fetch('/api/event-register', {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify(formData)
+                // });
+                
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // Show success
+                form.style.display = 'none';
+                successMessage.style.display = 'block';
+                
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+            });
+        })();
+
+        // Add to Calendar Functions
+        function addToGoogleCalendar() {
+            // Replace with dynamic event data
+            const event = {
+                title: 'Youth Summit 2026',
+                startDate: '20260214T100000',
+                endDate: '20260214T160000',
+                description: 'Empowering the next generation for excellence and leadership',
+                location: 'Youth Centre, Redemption Camp, Lagos'
+            };
+            
+            const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${event.startDate}/${event.endDate}&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}`;
+            window.open(url, '_blank');
+        }
+
+        function downloadICS() {
+            // Replace with dynamic event data
+            const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//RCCG Mobile World//Event//EN
+BEGIN:VEVENT
+UID:youth-summit-2026@rccg.org
+DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z
+DTSTART:20260214T100000
+DTEND:20260214T160000
+SUMMARY:Youth Summit 2026
+DESCRIPTION:Empowering the next generation for excellence and leadership
+LOCATION:Youth Centre, Redemption Camp, Lagos
+END:VEVENT
+END:VCALENDAR`;
+            
+            const blob = new Blob([icsContent], { type: 'text/calendar' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'youth-summit-2026.ics';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Share Functions
+        function shareOnFacebook() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'width=600,height=400');
+        }
+
+        function shareOnTwitter() {
+            const text = encodeURIComponent('Check out Youth Summit 2026!');
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank', 'width=600,height=400');
+        }
+
+        function shareOnWhatsApp() {
+            const text = encodeURIComponent('Check out Youth Summit 2026! ' + window.location.href);
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+        }
+
+        function copyEventLink() {
+            navigator.clipboard.writeText(window.location.href).then(function() {
+                const btn = document.getElementById('copyLinkBtn');
+                const text = document.getElementById('copyLinkText');
+                text.textContent = 'Copied!';
+                setTimeout(function() {
+                    text.textContent = 'Copy Link';
+                }, 2000);
+            });
+        }
+    </script>
 </body>
 
 </html>

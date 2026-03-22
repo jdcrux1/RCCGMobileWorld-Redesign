@@ -49,6 +49,15 @@ function openLiveStream(event) {
     document.body.style.overflow = 'hidden';
 }
 
+// EMAIL SUBSCRIBE
+function handleEmailSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.querySelector('input[type="email"]').value;
+    alert('Thank you for subscribing! We will send updates to ' + email);
+    form.reset();
+}
+
 function closeLiveStream() {
     const modal = document.getElementById('liveStreamModal');
     modal.classList.remove('active');

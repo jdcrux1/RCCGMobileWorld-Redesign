@@ -10,111 +10,1320 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] }, colors: { brand: { base: '#0f172a', light: '#1e293b', green: '#22c55e' } } } } }</script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    },
+                    colors: {
+                        brand: {
+                            base: '#0f172a',
+                            light: '#1e293b',
+                            accent: '#3b82f6',
+                            green: '#22c55e',
+                            greendark: '#16a34a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body { background-color: #020617; color: white; }
-        .glass-nav { background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(12px); }
-        .btn-primary { background: #22c55e; color: #020617; }
-        .btn-primary:hover { background: #4ade80; transform: translateY(-2px); }
-        .page-hero { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); padding: 180px 0 80px; text-align: center; }
-        .page-hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; color: white; margin-bottom: 20px; }
-        footer { background: #020617; border-top: 1px solid rgba(255, 255, 255, 0.05); }
-        .content-card { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.4s ease; }
-        .content-card:hover { transform: translateY(-8px); border-color: rgba(34, 197, 94, 0.3); }
+        :root {
+            --color-bg: #020617;
+            --color-bg-alt: #0f172a;
+            --color-text: #ffffff;
+            --color-text-muted: #94a3b8;
+            --color-primary: #22c55e;
+            --color-primary-hover: #4ade80;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            line-height: 1.6;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+        }
+
+        /* Skip link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--color-primary);
+            color: var(--color-bg);
+            padding: 8px 16px;
+            z-index: 10000;
+            transition: top 0.3s;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Focus states */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        /* Glass Navigation */
+        .glass-nav {
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .glass-nav.scrolled {
+            background: rgba(2, 6, 23, 0.95);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Breadcrumbs */
+        .breadcrumbs {
+            padding: 100px 0 40px;
+            background: linear-gradient(180deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+        }
+
+        .breadcrumb-link {
+            color: var(--color-text-muted);
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb-link:hover {
+            color: var(--color-primary);
+        }
+
+        /* Page Hero */
+        .page-hero {
+            padding: 60px 0;
+            background: linear-gradient(180deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+        }
+
+        /* Featured Sermon */
+        .featured-sermon {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--color-bg-alt) 0%, #1e293b 100%);
+        }
+
+        .featured-sermon-img {
+            position: absolute;
+            inset: 0;
+            opacity: 0.4;
+        }
+
+        .featured-sermon-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .featured-sermon-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(2, 6, 23, 0.95) 100%);
+        }
+
+        /* Filter Chips */
+        .filter-chip {
+            padding: 10px 20px;
+            border-radius: 50px;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .filter-chip:hover {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: rgba(34, 197, 94, 0.3);
+            color: white;
+        }
+
+        .filter-chip.active {
+            background: var(--color-primary);
+            color: var(--color-bg);
+            border-color: var(--color-primary);
+        }
+
+        /* Search */
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 20px 16px 52px;
+            border-radius: 50px;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--color-primary);
+            background: rgba(30, 41, 59, 0.8);
+        }
+
+        .search-input::placeholder {
+            color: var(--color-text-muted);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-text-muted);
+        }
+
+        /* Sort Dropdown */
+        .sort-dropdown {
+            padding: 12px 20px;
+            border-radius: 50px;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 0.875rem;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .sort-dropdown:focus {
+            border-color: var(--color-primary);
+        }
+
+        /* Sermon Card */
+        .sermon-card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .sermon-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(34, 197, 94, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .sermon-card-thumbnail {
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .sermon-card-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .sermon-card:hover .sermon-card-thumbnail img {
+            transform: scale(1.05);
+        }
+
+        .sermon-card-play {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(2, 6, 23, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sermon-card:hover .sermon-card-play,
+        .sermon-card:focus .sermon-card-play {
+            opacity: 1;
+        }
+
+        .play-btn {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-bg);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .sermon-card:hover .play-btn {
+            transform: scale(1);
+        }
+
+        /* Series Card */
+        .series-card {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            min-width: 200px;
+        }
+
+        .series-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .series-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .series-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 40%, rgba(2, 6, 23, 0.95) 100%);
+        }
+
+        /* Modal */
+        .sermon-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 6, 23, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 10000;
+            display: none;
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            overflow-y: auto;
+        }
+
+        .sermon-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .sermon-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 40px;
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sermon-modal-close {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .sermon-modal-close:hover {
+            background: var(--color-primary);
+            color: var(--color-bg);
+        }
+
+        .sermon-player {
+            aspect-ratio: 16/9;
+            max-height: 60vh;
+            background: black;
+        }
+
+        .sermon-player iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .sermon-modal-body {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            width: 100%;
+        }
+
+        /* Mini Player (Sticky) */
+        .mini-player {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 23, 42, 0.98);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 16px 24px;
+            display: none;
+            align-items: center;
+            gap: 16px;
+            z-index: 5000;
+        }
+
+        .mini-player.active {
+            display: flex;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%);
+            border-top: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: var(--color-primary);
+            color: var(--color-bg);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.3);
+        }
+
+        .btn-outline {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--color-bg);
+            border-color: white;
+        }
+
+        .btn-give {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
+            color: var(--color-bg);
+            transition: all 0.3s ease;
+        }
+
+        .btn-give:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 6, 23, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 4999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .mobile-menu-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mobile-menu-link {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .mobile-menu-overlay.open .mobile-menu-link {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mobile-menu-link:hover {
+            color: var(--color-primary);
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Search Overlay */
+        .search-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(180deg, var(--color-bg-alt) 0%, #1e293b 100%);
+            z-index: 6000;
+            transform: translateY(-100%);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-overlay.open {
+            transform: translateY(0);
+        }
+
+        .search-content-wrapper {
+            width: 100%;
+            max-width: 800px;
+            position: relative;
+            padding: 0 40px;
+        }
+
+        .search-field {
+            width: 100%;
+            border: none;
+            border-bottom: 2px solid var(--color-primary);
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            color: white;
+            background: transparent;
+            padding: 10px 60px 10px 0;
+            outline: none;
+        }
+
+        .search-close-btn {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: white;
+        }
+
+        /* Stream Modal */
+        .stream-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 7000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stream-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .stream-modal-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(2, 6, 23, 0.9);
+        }
+
+        .stream-modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            aspect-ratio: 16 / 9;
+            z-index: 1;
+        }
+
+        .close-stream-btn {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--color-bg);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-muted);
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--color-primary);
+            color: var(--color-bg);
+        }
+
+        /* Load More */
+        .load-more-btn {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 40px auto 0;
+            padding: 16px 32px;
+            border-radius: 50px;
+            background: transparent;
+            border: 2px solid var(--color-primary);
+            color: var(--color-primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .load-more-btn:hover {
+            background: var(--color-primary);
+            color: var(--color-bg);
+        }
+
+        .load-more-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Loading skeleton */
+        .skeleton {
+            background: linear-gradient(90deg, rgba(30, 41, 59, 0.5) 25%, rgba(30, 41, 59, 0.8) 50%, rgba(30, 41, 59, 0.5) 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite;
+            border-radius: 8px;
+        }
+
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Hide scrollbar for horizontal scroll */
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
     </style>
 </head>
 
 <body class="antialiased">
 
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <button class="search-close-btn" onclick="toggleSearch()">
+            <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <div class="search-content-wrapper">
+            <input type="text" class="search-field" id="mainSearchInput" placeholder="Search by topic, Bible verse, or speaker...">
+        </div>
+    </div>
+
+    <!-- Live Stream Modal -->
+    <div id="liveStreamModal" class="stream-modal">
+        <div class="stream-modal-backdrop" onclick="closeLiveStream()"></div>
+        <div class="stream-modal-content">
+            <button class="close-stream-btn" onclick="closeLiveStream()">× Close</button>
+            <div class="video-container">
+                <iframe id="liveVideo" src="https://www.youtube.com/embed/taRwgX40TSg" title="Live Stream"></iframe>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass-nav">
-        <div class="max-w-7xl mx-auto px-4">
+    <nav class="fixed w-full z-50 glass-nav" id="mainNav">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="../index3.html" class="font-serif text-2xl font-bold tracking-tight text-white">RCCG<span class="text-brand-green">.</span></a>
+                    <a href="../index3.html" class="flex items-center gap-2">
+                        <img src="../rccg-for-web.png" alt="RCCG Logo" class="h-10 w-auto">
+                    </a>
                 </div>
+
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="../index3.html" class="text-sm font-medium text-gray-300 hover:text-white">Home</a>
                     <a href="about.html" class="text-sm font-medium text-gray-300 hover:text-white">About</a>
-                    <a href="sermons.html" class="text-sm font-medium text-white border-b border-brand-green pb-1">Sermons</a>
+                    <a href="sermons.html" class="text-sm font-medium text-white border-b-2 border-brand-green pb-1">Sermons</a>
                     <a href="events.html" class="text-sm font-medium text-gray-300 hover:text-white">Events</a>
                     <a href="contact.html" class="text-sm font-medium text-gray-300 hover:text-white">Contact</a>
-                    <a href="give.html" class="text-sm font-medium text-white btn-primary px-5 py-2 rounded-full">Give</a>
+                    
+                    <div class="pl-4 border-l border-gray-700 flex gap-4 items-center">
+                        <button onclick="toggleSearch()" class="text-gray-300 hover:text-white p-2" aria-label="Search">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                        </button>
+                        <a href="#" onclick="openLiveStream(event)" class="text-sm font-medium text-white btn-outline px-5 py-2 rounded-full">Watch Live</a>
+                        <a href="give.html" class="btn-give px-5 py-2 rounded-full text-sm font-semibold inline-flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+                            </svg>
+                            Give
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex md:hidden items-center gap-2">
+                    <button onclick="toggleSearch()" class="text-gray-300 hover:text-white p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </button>
+                    <button onclick="toggleMobileMenu()" class="text-gray-300 hover:text-white p-2" id="mobileMenuBtn">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
     </nav>
 
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" id="mobileMenu">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <a href="../index3.html" class="mobile-menu-link" style="transition-delay: 0.1s;">Home</a>
+        <a href="about.html" class="mobile-menu-link" style="transition-delay: 0.15s;">About</a>
+        <a href="sermons.html" class="mobile-menu-link" style="transition-delay: 0.2s; color: var(--color-primary);">Sermons</a>
+        <a href="events.html" class="mobile-menu-link" style="transition-delay: 0.25s;">Events</a>
+        <a href="contact.html" class="mobile-menu-link" style="transition-delay: 0.3s;">Contact</a>
+        <a href="give.html" class="mobile-menu-link" style="transition-delay: 0.35s;">Give</a>
+    </div>
+
+    <main id="main-content">
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="max-w-7xl mx-auto px-4">
+            <nav aria-label="Breadcrumb">
+                <ol class="flex items-center gap-2 text-sm">
+                    <li><a href="../index3.html" class="breadcrumb-link">Home</a></li>
+                    <li class="text-gray-600">/</li>
+                    <li class="text-white font-medium">Sermons</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
     <!-- Page Hero -->
     <section class="page-hero">
-        <p class="text-brand-green font-semibold uppercase tracking-wider mb-4">Sermons</p>
-        <h1 class="page-hero-title">Watch & Listen</h1>
-        <p class="text-gray-400 max-w-xl mx-auto">Be inspired by powerful messages from our pastors.</p>
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h1 class="font-serif text-4xl md:text-5xl font-bold text-white mb-4">Sermons & Messages</h1>
+            <p class="text-gray-400 text-lg max-w-2xl mx-auto">Listen to the latest messages or browse by series, speaker, and topic.</p>
+        </div>
     </section>
 
-    <!-- Sermons Grid -->
-    <section class="py-20 bg-[#020617]">
+    <!-- Featured / Latest Sermon -->
+    <section class="py-12 bg-[#020617]">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="content-card rounded-2xl overflow-hidden cursor-pointer group">
-                    <div class="relative h-56 overflow-hidden">
-                        <img src="https://img.youtube.com/vi/I3a-UOO0j1M/maxresdefault.jpg" alt="Sermon" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-black/50 flex items-center justify-center">
-                            <div class="w-16 h-16 rounded-full bg-brand-green flex items-center justify-center">▶</div>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <p class="text-brand-green text-sm font-semibold mb-2">February 2026</p>
-                        <h3 class="font-serif text-xl font-bold text-white mb-2">Going Higher Part 75</h3>
-                        <p class="text-gray-400 text-sm">Pastor E.A. Adeboye</p>
-                    </div>
+            <p class="text-brand-green font-semibold uppercase tracking-wider mb-6">Latest Message</p>
+            
+            <div class="featured-sermon grid md:grid-cols-2 gap-8 items-center" tabindex="0" role="button" onclick="openSermonModal('I3a-UOO0j1M', 'Going Higher Part 75', 'Pastor E.A. Adeboye', 'February 2026', 'The word for this month is "Higher" - God wants to take us higher in every area of our lives.')">
+                <div class="featured-sermon-img">
+                    <img src="https://img.youtube.com/vi/I3a-UOO0j1M/maxresdefault.jpg" alt="Featured Sermon" loading="lazy">
                 </div>
-                <div class="content-card rounded-2xl overflow-hidden cursor-pointer group">
-                    <div class="relative h-56 overflow-hidden">
-                        <img src="https://img.youtube.com/vi/ng03NChF-Vw/maxresdefault.jpg" alt="Sermon" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-black/50 flex items-center justify-center">
-                            <div class="w-16 h-16 rounded-full bg-brand-green flex items-center justify-center">▶</div>
-                        </div>
+                <div class="featured-sermon-overlay md:hidden"></div>
+                <div class="relative z-10 p-8">
+                    <div class="inline-block px-4 py-1 bg-brand-green/20 text-brand-green text-sm font-semibold rounded-full mb-4">
+                        Featured
                     </div>
-                    <div class="p-6">
-                        <p class="text-brand-green text-sm font-semibold mb-2">January 2026</p>
-                        <h3 class="font-serif text-xl font-bold text-white mb-2">Holy Ghost Service</h3>
-                        <p class="text-gray-400 text-sm">Pastor E.A. Adeboye</p>
-                    </div>
-                </div>
-                <div class="content-card rounded-2xl overflow-hidden cursor-pointer group">
-                    <div class="relative h-56 overflow-hidden bg-gradient-to-br from-brand-light to-brand-base flex items-center justify-center">
-                        <div class="text-center">
-                            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-brand-green/20 flex items-center justify-center text-2xl">📚</div>
-                            <p class="text-white font-semibold">View All Series</p>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="font-serif text-xl font-bold text-white mb-2">Sermon Archive</h3>
-                        <p class="text-gray-400 text-sm">Browse all past messages</p>
+                    <p class="text-brand-green font-medium mb-2">Going Higher Series</p>
+                    <h2 class="font-serif text-2xl md:text-3xl font-bold text-white mb-3">Going Higher Part 75</h2>
+                    <p class="text-gray-400 mb-2">Pastor E.A. Adeboye</p>
+                    <p class="text-gray-500 text-sm mb-6">February 2026</p>
+                    
+                    <div class="flex items-center gap-4">
+                        <button class="btn-primary px-8 py-3 rounded-full font-semibold inline-flex items-center gap-3" aria-label="Play sermon">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                            Watch Now
+                        </button>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">More Info →</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Filters & Search -->
+    <section class="py-8 bg-[#0f172a] border-y border-gray-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <!-- Search Bar -->
+            <div class="search-container mb-6">
+                <svg class="search-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" class="search-input" id="sermonSearch" placeholder="Search by topic, Bible verse, or speaker..." aria-label="Search sermons">
+            </div>
+            
+            <!-- Filter Chips -->
+            <div class="flex flex-wrap gap-3 mb-6" role="group" aria-label="Filter by topic">
+                <button class="filter-chip active" data-filter="all">All</button>
+                <button class="filter-chip" data-filter="faith">Faith</button>
+                <button class="filter-chip" data-filter="prayer">Prayer</button>
+                <button class="filter-chip" data-filter="love">Love</button>
+                <button class="filter-chip" data-filter="purpose">Purpose</button>
+                <button class="filter-chip" data-filter="healing">Healing</button>
+                <button class="filter-chip" data-filter="prosperity">Prosperity</button>
+            </div>
+            
+            <!-- Sort -->
+            <div class="flex items-center justify-between">
+                <p class="text-gray-400 text-sm"><span id="sermonCount">12</span> sermons found</p>
+                <select class="sort-dropdown" aria-label="Sort sermons">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="popular">Most Popular</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sermon Grid -->
+    <section class="py-16 bg-[#020617]">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="sermonGrid">
+                <!-- Sermon Card 1 -->
+                <article class="sermon-card" tabindex="0" role="button" aria-label="Play sermon: Going Higher Part 75" onclick="openSermonModal('I3a-UOO0j1M', 'Going Higher Part 75', 'Pastor E.A. Adeboye', 'Feb 2026', 'The word for this month is Higher.')">
+                    <div class="sermon-card-thumbnail">
+                        <img src="https://img.youtube.com/vi/I3a-UOO0j1M/maxresdefault.jpg" alt="Sermon thumbnail" loading="lazy">
+                        <div class="sermon-card-play">
+                            <div class="play-btn">
+                                <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-brand-green text-xs font-semibold uppercase mb-2">Going Higher</p>
+                        <h3 class="font-semibold text-white text-lg mb-2 line-clamp-2">Going Higher Part 75</h3>
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-8 h-8 rounded-full bg-brand-green/20 flex items-center justify-center">
+                                <span class="text-brand-green text-xs font-bold">P</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">Pastor E.A. Adeboye</p>
+                        </div>
+                        <p class="text-gray-500 text-sm">Feb 2026</p>
+                    </div>
+                </article>
+                
+                <!-- Sermon Card 2 -->
+                <article class="sermon-card" tabindex="0" role="button" aria-label="Play sermon: Holy Ghost Service" onclick="openSermonModal('ng03NChF-Vw', 'Holy Ghost Service', 'Pastor E.A. Adeboye', 'Jan 2026', 'Experience the power of the Holy Ghost.')">
+                    <div class="sermon-card-thumbnail">
+                        <img src="https://img.youtube.com/vi/ng03NChF-Vw/maxresdefault.jpg" alt="Sermon thumbnail" loading="lazy">
+                        <div class="sermon-card-play">
+                            <div class="play-btn">
+                                <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-brand-green text-xs font-semibold uppercase mb-2">Holy Ghost Service</p>
+                        <h3 class="font-semibold text-white text-lg mb-2 line-clamp-2">Holy Ghost Service</h3>
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-8 h-8 rounded-full bg-brand-green/20 flex items-center justify-center">
+                                <span class="text-brand-green text-xs font-bold">P</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">Pastor E.A. Adeboye</p>
+                        </div>
+                        <p class="text-gray-500 text-sm">Jan 2026</p>
+                    </div>
+                </article>
+                
+                <!-- Sermon Card 3 -->
+                <article class="sermon-card" tabindex="0" role="button" aria-label="Play sermon: Divine Acceleration" onclick="openSermonModal('vJ3VrKFycNI', 'Divine Acceleration', 'Pastor Folu Adeboye', 'Jan 2026', 'God is accelerating your destiny.')">
+                    <div class="sermon-card-thumbnail">
+                        <img src="https://img.youtube.com/vi/vJ3VrKFycNI/maxresdefault.jpg" alt="Sermon thumbnail" loading="lazy">
+                        <div class="sermon-card-play">
+                            <div class="play-btn">
+                                <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-brand-green text-xs font-semibold uppercase mb-2">Women's Conference</p>
+                        <h3 class="font-semibold text-white text-lg mb-2 line-clamp-2">Divine Acceleration</h3>
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-8 h-8 rounded-full bg-brand-green/20 flex items-center justify-center">
+                                <span class="text-brand-green text-xs font-bold">F</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">Pastor Folu Adeboye</p>
+                        </div>
+                        <p class="text-gray-500 text-sm">Jan 2026</p>
+                    </div>
+                </article>
+                
+                <!-- Sermon Card 4 -->
+                <article class="sermon-card" tabindex="0" role="button" aria-label="Play sermon: Faith That Works" onclick="openSermonModal('dQw4w9WgXcQ', 'Faith That Works', 'Pastor E.A. Adeboye', 'Dec 2025', 'Living faith that produces results.')">
+                    <div class="sermon-card-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1507692049790-de58290a4334?w=600&q=80" alt="Sermon thumbnail" loading="lazy">
+                        <div class="sermon-card-play">
+                            <div class="play-btn">
+                                <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-brand-green text-xs font-semibold uppercase mb-2">Faith</p>
+                        <h3 class="font-semibold text-white text-lg mb-2 line-clamp-2">Faith That Works</h3>
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-8 h-8 rounded-full bg-brand-green/20 flex items-center justify-center">
+                                <span class="text-brand-green text-xs font-bold">P</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">Pastor E.A. Adeboye</p>
+                        </div>
+                        <p class="text-gray-500 text-sm">Dec 2025</p>
+                    </div>
+                </article>
+                
+                <!-- Sermon Card 5 -->
+                <article class="sermon-card" tabindex="0" role="button" aria-label="Play sermon: Prayer Power" onclick="openSermonModal('dQw4w9WgXcQ', 'Prayer Power', 'Pastor E.A. Adeboye', 'Nov 2025', 'The power of prayer in the believers life.')">
+                    <div class="sermon-card-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600&q=80" alt="Sermon thumbnail" loading="lazy">
+                        <div class="sermon-card-play">
+                            <div class="play-btn">
+                                <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-brand-green text-xs font-semibold uppercase mb-2">Prayer</p>
+                        <h3 class="font-semibold text-white text-lg mb-2 line-clamp-2">Prayer Power</h3>
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-8 h-8 rounded-full bg-brand-green/20 flex items-center justify-center">
+                                <span class="text-brand-green text-xs font-bold">P</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">Pastor E.A. Adeboye</p>
+                        </div>
+                        <p class="text-gray-500 text-sm">Nov 2025</p>
+                    </div>
+                </article>
+                
+                <!-- Sermon Card 6 -->
+                <article class="sermon-card" tabindex="0" role="button" aria-label="Play sermon: Love In Action" onclick="openSermonModal('dQw4w9WgXcQ', 'Love In Action', 'Pastor Folu Adeboye', 'Oct 2025', 'Showing Gods love through our actions.')">
+                    <div class="sermon-card-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80" alt="Sermon thumbnail" loading="lazy">
+                        <div class="sermon-card-play">
+                            <div class="play-btn">
+                                <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-brand-green text-xs font-semibold uppercase mb-2">Love</p>
+                        <h3 class="font-semibold text-white text-lg mb-2 line-clamp-2">Love In Action</h3>
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-8 h-8 rounded-full bg-brand-green/20 flex items-center justify-center">
+                                <span class="text-brand-green text-xs font-bold">F</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">Pastor Folu Adeboye</p>
+                        </div>
+                        <p class="text-gray-500 text-sm">Oct 2025</p>
+                    </div>
+                </article>
+            </div>
+            
+            <!-- Load More -->
+            <button class="load-more-btn" id="loadMoreBtn">Load More Sermons</button>
+        </div>
+    </section>
+
+    <!-- Browse by Series -->
+    <section class="py-16 bg-[#0f172a]">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="font-serif text-2xl md:text-3xl font-bold text-white">Browse by Series</h2>
+                <a href="#" class="text-brand-green font-medium hover:underline">View All Series →</a>
+            </div>
+            
+            <div class="flex gap-6 overflow-x-auto hide-scrollbar pb-4" id="seriesScroll">
+                <!-- Series 1 -->
+                <div class="series-card flex-shrink-0 w-64" tabindex="0" role="button" aria-label="View Going Higher series">
+                    <img src="https://img.youtube.com/vi/I3a-UOO0j1M/maxresdefault.jpg" alt="Going Higher Series" loading="lazy">
+                    <div class="series-card-overlay"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4">
+                        <h3 class="font-semibold text-white">Going Higher</h3>
+                        <p class="text-gray-400 text-sm">75 sermons</p>
+                    </div>
+                </div>
+                
+                <!-- Series 2 -->
+                <div class="series-card flex-shrink-0 w-64" tabindex="0" role="button" aria-label="View Holy Ghost Service series">
+                    <img src="https://img.youtube.com/vi/ng03NChF-Vw/maxresdefault.jpg" alt="Holy Ghost Service" loading="lazy">
+                    <div class="series-card-overlay"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4">
+                        <h3 class="font-semibold text-white">Holy Ghost Service</h3>
+                        <p class="text-gray-400 text-sm">120 sermons</p>
+                    </div>
+                </div>
+                
+                <!-- Series 3 -->
+                <div class="series-card flex-shrink-0 w-64" tabindex="0" role="button" aria-label="View Faith series">
+                    <img src="https://images.unsplash.com/photo-1507692049790-de58290a4334?w=600&q=80" alt="Faith Series" loading="lazy">
+                    <div class="series-card-overlay"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4">
+                        <h3 class="font-semibold text-white">Faith</h3>
+                        <p class="text-gray-400 text-sm">25 sermons</p>
+                    </div>
+                </div>
+                
+                <!-- Series 4 -->
+                <div class="series-card flex-shrink-0 w-64" tabindex="0" role="button" aria-label="View Prayer series">
+                    <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600&q=80" alt="Prayer Series" loading="lazy">
+                    <div class="series-card-overlay"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4">
+                        <h3 class="font-semibold text-white">Prayer</h3>
+                        <p class="text-gray-400 text-sm">30 sermons</p>
+                    </div>
+                </div>
+                
+                <!-- Series 5 -->
+                <div class="series-card flex-shrink-0 w-64" tabindex="0" role="button" aria-label="View Love series">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80" alt="Love Series" loading="lazy">
+                    <div class="series-card-overlay"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4">
+                        <h3 class="font-semibold text-white">Love</h3>
+                        <p class="text-gray-400 text-sm">15 sermons</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section py-16">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="font-serif text-2xl md:text-3xl font-bold text-white mb-4">Stay Connected</h2>
+            <p class="text-gray-300 mb-8 max-w-2xl mx-auto">Never miss a sermon. Subscribe to our podcast or get notified when new messages are posted.</p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#" class="btn-outline px-8 py-3 rounded-full inline-flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"></path>
+                    </svg>
+                    Apple Podcasts
+                </a>
+                <a href="#" class="btn-outline px-8 py-3 rounded-full inline-flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"></path>
+                    </svg>
+                    Spotify
+                </a>
+                <a href="#" class="btn-outline px-8 py-3 rounded-full inline-flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path>
+                    </svg>
+                    YouTube
+                </a>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- Sermon Modal -->
+    <div class="sermon-modal" id="sermonModal" role="dialog" aria-modal="true" aria-label="Sermon player">
+        <div class="sermon-modal-header">
+            <div>
+                <h3 class="font-serif text-xl font-bold text-white" id="modalSermonTitle">Sermon Title</h3>
+                <p class="text-gray-400 text-sm" id="modalSermonSpeaker">Speaker Name</p>
+            </div>
+            <button class="sermon-modal-close" onclick="closeSermonModal()" aria-label="Close">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="sermon-player">
+            <iframe id="sermonFrame" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+        
+        <div class="sermon-modal-body">
+            <p class="text-gray-400 mb-4" id="modalSermonDesc">Sermon description goes here.</p>
+            
+            <div class="flex flex-wrap gap-4 mb-8">
+                <button class="btn-outline px-6 py-2 rounded-full text-sm">
+                    <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                    </svg>
+                    Download Audio
+                </button>
+                <button class="btn-outline px-6 py-2 rounded-full text-sm">
+                    <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+                    </svg>
+                    Share
+                </button>
+            </div>
+            
+            <h4 class="font-semibold text-white mb-4">Related Sermons</h4>
+            <div class="grid md:grid-cols-2 gap-4" id="relatedSermons">
+                <div class="flex gap-4 items-center p-4 bg-[#0f172a] rounded-lg">
+                    <img src="https://img.youtube.com/vi/ng03NChF-Vw/mqdefault.jpg" alt="Related" class="w-24 h-16 object-cover rounded">
+                    <div>
+                        <p class="text-white font-medium text-sm">Holy Ghost Service</p>
+                        <p class="text-gray-500 text-xs">Jan 2026</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 items-center p-4 bg-[#0f172a] rounded-lg">
+                    <img src="https://img.youtube.com/vi/vJ3VrKFycNI/mqdefault.jpg" alt="Related" class="w-24 h-16 object-cover rounded">
+                    <div>
+                        <p class="text-white font-medium text-sm">Divine Acceleration</p>
+                        <p class="text-gray-500 text-xs">Jan 2026</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mini Player (Sticky) -->
+    <div class="mini-player" id="miniPlayer">
+        <img src="" alt="" class="w-12 h-12 object-cover rounded" id="miniPlayerImg">
+        <div class="flex-1 min-w-0">
+            <p class="text-white font-medium text-sm truncate" id="miniPlayerTitle">Sermon Title</p>
+            <p class="text-gray-400 text-xs truncate" id="miniPlayerSpeaker">Speaker</p>
+        </div>
+        <button class="text-white hover:text-brand-green p-2" onclick="toggleMiniPlayer()">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" id="miniPlayerPlayPause">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+        </button>
+        <button class="text-gray-400 hover:text-white p-2" onclick="closeMiniPlayer()">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+    </div>
 
     <!-- Footer -->
     <footer class="py-16">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="grid md:grid-cols-4 gap-12">
-                <div class="col-span-2">
-                    <a href="../index3.html" class="font-serif text-2xl font-bold text-white mb-4 block">RCCG<span class="text-brand-green">.</span></a>
-                    <p class="text-gray-400 text-sm">A place where faith grows.</p>
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <a href="../index3.html" class="flex items-center gap-2 mb-4">
+                        <img src="../rccg-for-web.png" alt="RCCG Logo" class="h-10 w-auto">
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6 max-w-md">
+                        A place where faith grows, hearts connect, and lives are transformed through the power of God's love.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="social-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                        <a href="#" class="social-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a>
+                        <a href="#" class="social-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg></a>
+                    </div>
                 </div>
-                <div><h4 class="text-white font-semibold mb-6">Quick Links</h4><ul class="space-y-4 text-gray-400 text-sm"><li><a href="about.html">About</a></li><li><a href="sermons.html">Sermons</a></li><li><a href="events.html">Events</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-                <div><h4 class="text-white font-semibold mb-6">Resources</h4><ul class="space-y-4 text-gray-400 text-sm"><li><a href="blog.html">Blog</a></li><li><a href="devotionals.html">Devotionals</a></li><li><a href="testimonies.html">Testimonies</a></li><li><a href="gallery.html">Gallery</a></li></ul></div>
+                <div>
+                    <h4 class="text-white font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-4">
+                        <li><a href="about.html" class="text-gray-400 hover:text-white text-sm">About</a></li>
+                        <li><a href="sermons.html" class="text-gray-400 hover:text-white text-sm">Sermons</a></li>
+                        <li><a href="events.html" class="text-gray-400 hover:text-white text-sm">Events</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white text-sm">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-6">Resources</h4>
+                    <ul class="space-y-4">
+                        <li><a href="blog.html" class="text-gray-400 hover:text-white text-sm">Blog</a></li>
+                        <li><a href="devotionals.html" class="text-gray-400 hover:text-white text-sm">Devotionals</a></li>
+                        <li><a href="testimonies.html" class="text-gray-400 hover:text-white text-sm">Testimonies</a></li>
+                        <li><a href="gallery.html" class="text-gray-400 hover:text-white text-sm">Gallery</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="border-t border-gray-800 pt-8 mt-12 flex justify-between text-sm text-gray-500">
-                <p>&copy; 2026 RCCG Mobile World.</p>
-                <div class="space-x-4"><a href="privacy-policy.html">Privacy</a><a href="terms-of-service.html">Terms</a></div>
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p>&copy; 2026 RCCG Mobile World. All rights reserved.</p>
+                <div class="mt-4 md:mt-0 space-x-4">
+                    <a href="privacy-policy.html" class="hover:text-white">Privacy Policy</a>
+                    <a href="terms-of-service.html" class="hover:text-white">Terms of Service</a>
+                </div>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Sticky Navigation
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const btn = document.getElementById('mobileMenuBtn');
+            const isOpen = menu.classList.contains('open');
+            menu.classList.toggle('open', !isOpen);
+            btn.setAttribute('aria-expanded', !isOpen);
+            document.body.style.overflow = isOpen ? 'auto' : 'hidden';
+        }
+
+        // Search
+        function toggleSearch() {
+            const overlay = document.getElementById('searchOverlay');
+            overlay.classList.toggle('open');
+            const isOpen = overlay.classList.contains('open');
+            document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+            if (isOpen) setTimeout(() => document.getElementById('mainSearchInput').focus(), 300);
+        }
+
+        // Live Stream
+        function openLiveStream(e) {
+            if (e) e.preventDefault();
+            document.getElementById('liveStreamModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLiveStream() {
+            document.getElementById('liveStreamModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Sermon Modal
+        function openSermonModal(videoId, title, speaker, date, description) {
+            document.getElementById('modalSermonTitle').textContent = title;
+            document.getElementById('modalSermonSpeaker').textContent = speaker + ' • ' + date;
+            document.getElementById('modalSermonDesc').textContent = description;
+            document.getElementById('sermonFrame').src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            
+            // Show mini player
+            document.getElementById('miniPlayerTitle').textContent = title;
+            document.getElementById('miniPlayerSpeaker').textContent = speaker;
+            document.getElementById('miniPlayer').classList.add('active');
+            
+            document.getElementById('sermonModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSermonModal() {
+            document.getElementById('sermonModal').classList.remove('active');
+            document.getElementById('sermonFrame').src = '';
+            document.body.style.overflow = 'auto';
+        }
+
+        function closeMiniPlayer() {
+            document.getElementById('miniPlayer').classList.remove('active');
+            closeSermonModal();
+        }
+
+        // Filter Chips
+        document.querySelectorAll('.filter-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+            });
+        });
+
+        // Load More Button
+        let loadedCount = 6;
+        const totalSermons = 12;
+        
+        document.getElementById('loadMoreBtn').addEventListener('click', () => {
+            const btn = document.getElementById('loadMoreBtn');
+            btn.disabled = true;
+            btn.textContent = 'Loading...';
+            
+            setTimeout(() => {
+                loadedCount = totalSermons;
+                document.getElementById('sermonCount').textContent = totalSermons;
+                btn.style.display = 'none';
+            }, 1000);
+        });
+
+        // Search functionality
+        document.getElementById('sermonSearch').addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.sermon-card');
+            
+            cards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const speaker = card.querySelector('.text-gray-400').textContent.toLowerCase();
+                const category = card.querySelector('.text-brand-green').textContent.toLowerCase();
+                
+                if (title.includes(query) || speaker.includes(query) || category.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
