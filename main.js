@@ -1,12 +1,15 @@
 // STICKY NAVBAR
 window.addEventListener('scroll', () => {
     const nav = document.querySelector('nav');
+    if (!nav) return;
     if (window.scrollY > 20) {
         nav.classList.add('shadow-lg');
-        nav.classList.replace('bg-transparent', 'bg-brand-base/90');
+        nav.classList.remove('bg-transparent');
+        nav.classList.add('bg-brand-base/90');
     } else {
         nav.classList.remove('shadow-lg');
-        nav.classList.replace('bg-brand-base/90', 'bg-transparent');
+        nav.classList.remove('bg-brand-base/90');
+        nav.classList.add('bg-transparent');
     }
 });
 
@@ -38,6 +41,22 @@ function toggleLogin(event) {
         } else {
             document.body.style.overflow = 'auto';
         }
+    }
+}
+
+// MOBILE MENU TOGGLE
+function toggleMobileMenu() {
+    try {
+        const menu = document.getElementById('mobileMenu');
+        if (menu) {
+            menu.classList.toggle('active');
+            document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
+            console.log('Mobile menu toggled, active:', menu.classList.contains('active'));
+        } else {
+            console.error('Mobile menu element not found');
+        }
+    } catch (e) {
+        console.error('Error toggling mobile menu:', e);
     }
 }
 
